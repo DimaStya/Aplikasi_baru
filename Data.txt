@@ -1,0 +1,26 @@
+----------------|-------------|-----------------|----------------|
+------Table-----|----Kode ----|----Hak_akses----|----Username----|
+----------------|-------------|-----------------|----------------|
+Nasional        |  nas_       |       -		|     ?	         | v
+Area		|  area_      |       -		|     ?		 | v
+Perwakilan 	|  kaper_     |       -		|     ?		 | v
+Sales		|  sales_     |       -		|     --	 | v
+AdmPer 		|  admper_    |       1		|     Email	 | v
+AdmPusat 	|  pusat_     |       2		|     Email	 | v
+AdmKeu 		|  keu_       |       3		|     Email	 | v
+Gudang		|  gdg_       |       4		|     Email 	 | v
+Produksi	|  prod_      |       5		|     Email 	 | v
+Admin		|  admin      |      10		|     Admin 	 | -v
+Co_pemasaran 	|  Co_pusat   |      11		|     Co_pusat	 | -v
+Co_Keuangan 	|  Co_keu     |      12		|     Co_keu 	 | -v
+Customer	|  cust_      |      -		|     --	 | v
+Sub_customer 	|  subcust_   |      -		|     --	 |
+
+
+list untuk surat pesanan
+Menunggu Do => Tanpa menambah stok pesan, dan bisa dihapus oleh admin
+DO, Menunggu SJ => no pesanan akan masuk ke tbl do -> Otomatis menambah di stok pesan, dan hanya bisa request hapus oleh admin perwakilan
+Menunggu Persetujuan Hapus => Admin melakukan request hapus dan menunggu dihapus oleh admin pusat jika disetujui
+Setuju Hapus => data pesan akan dihapus oleh admin pusat -> mengurangi stok pesan dan tanpa menghilangkan record di tbl_do
+SJ, Proses Faktur => data masuk tbl_sj dan membuat data loop sesuai data dari no pesanan -> tanpa bisa request hapus dari manapun.
+

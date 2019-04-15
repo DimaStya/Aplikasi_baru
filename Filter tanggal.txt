@@ -1,0 +1,18 @@
+SELECT * 
+FROM tbl_mou
+WHERE DATE( tanggal ) 
+BETWEEN  '2019-01-05'
+AND  '2019-01-23'
+
+
+/// untuk menambah 0 depan
+$number = 51;
+$number = sprintf('%04d',$number);
+print $number;
+// outputs 0051
+
+
+$number = 8051;
+$number = sprintf('%04d',$number);
+print $number;
+// outputs 8051

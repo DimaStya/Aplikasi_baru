@@ -1,0 +1,75 @@
+CREATE TABLE tbl_kasir (
+  id_kasir INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nama_kasir VARCHAR(32) NULL,
+  alamat VARCHAR(255) NULL,
+  no_telp VARCHAR(15) NULL,
+  PRIMARY KEY(id_kasir)
+);
+
+CREATE TABLE tbl_customer (
+  id_customer INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nama_customer VARCHAR(32) NULL,
+  alamat VARCHAR(255) NULL,
+  PRIMARY KEY(id_customer)
+);
+
+CREATE TABLE tbl_supplier (
+  id_supplier INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nama_supplier VARCHAR(32) NULL,
+  PRIMARY KEY(id_supplier)
+);
+
+CREATE TABLE tbl_member (
+  id_member INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_customer INTEGER UNSIGNED NOT NULL,
+  diskon INTEGER UNSIGNED NULL,
+  PRIMARY KEY(id_member),
+  FOREIGN KEY(id_customer)
+    REFERENCES tbl_customer(id_customer)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+);
+
+CREATE TABLE tbl_barang (
+  id_barang INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_supplier INTEGER UNSIGNED NOT NULL,
+  nama_barang VARCHAR(32) NULL,
+  jenis VARCHAR(32) NULL,
+  stok INTEGER UNSIGNED NULL,
+  PRIMARY KEY(id_barang),
+  FOREIGN KEY(id_supplier)
+    REFERENCES tbl_supplier(id_supplier)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+);
+
+CREATE TABLE tbl_transaksi (
+  id_transaksi INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_customer INTEGER UNSIGNED NOT NULL,
+  id_kasir INTEGER UNSIGNED NOT NULL,
+  tanggal INTEGER UNSIGNED NULL,
+  PRIMARY KEY(id_transaksi),
+  FOREIGN KEY(id_kasir)
+    REFERENCES tbl_kasir(id_kasir)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  FOREIGN KEY(id_customer)
+    REFERENCES tbl_customer(id_customer)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+);
+
+CREATE TABLE tbl_transaksi_has_tbl_barang (
+  id_transaksi INTEGER UNSIGNED NOT NULL,
+  id_barang INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(id_transaksi, id_barang),
+  FOREIGN KEY(id_transaksi)
+    REFERENCES tbl_transaksi(id_transaksi)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  FOREIGN KEY(id_barang)
+    REFERENCES tbl_barang(id_barang)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+);
+
