@@ -89,7 +89,6 @@ class Import extends CI_Controller {
 		}
 
 		// Panggil fungsi insert_multiple yg telah kita buat sebelumnya di model
-		
 		date_default_timezone_set("Asia/Jakarta");
 			$tahun_sek= date('Y');
 			$tahun_lalu = $tahun_sek-1;

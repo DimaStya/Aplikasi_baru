@@ -35,7 +35,60 @@
             <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Pesanan';?>"><i class="fa fa-circle-o"></i> Pesanan Baru</a></li>
             <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Proses';?>"><i class="fa fa-circle-o"></i>Proses SJ</a></li>
             <?php if($menu=='3'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Selesai';?>"><i class="fa fa-circle-o"></i> SJ selesai</a></li>
-            </li>
+            <?php if($menu=='4'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Pesan_selesai';?>"><i class="fa fa-circle-o"></i>Pesanan Selesai</a></li>
+          </ul>
+        </li>
+        <?php
+        if($angka=='3'){
+          echo '<li class="treeview active">';
+        }else{
+          echo '<li class="treeview">';
+        }
+        ?>
+          <a href="#">
+            <i class="fa fa-reply"></i>
+            <span>Retur</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Reqretur';?>"><i class="fa fa-circle-o"></i> Req Retur</a></li>
+            <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Retur';?>"><i class="fa fa-circle-o"></i>Terproses</a></li>
+            <?php if($menu=='3'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Update';?>"><i class="fa fa-circle-o"></i> Permintaan Update</a></li>
+          </ul>
+        </li>
+        <?php
+        if($angka=='4'){
+          echo '<li class="treeview active">';
+        }else{
+          echo '<li class="treeview">';
+        }
+        ?>
+          <a href="#">
+            <i class="fa fa-tasks"></i>
+            <span>Stok Mini</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Pesanan_stokmini';?>"><i class="fa fa-circle-o"></i> Pesanan</a></li>
+            <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Proses_stokmini';?>"><i class="fa fa-circle-o"></i>SJ Stok Mini</a></li>
+            <?php if($menu=='3'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Stok_mini';?>"><i class="fa fa-circle-o"></i> Daftar Stok Mini</a></li>
+          </ul>
+        </li>
+        <?php
+        if($angka=='5'){
+          echo '<li class="treeview active">';
+        }else{
+          echo '<li class="treeview">';
+        }
+        ?>
+          <a href="#">
+            <i class="fa fa-th-large"></i>
+            <span>LPB</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Lpb_baru';?>"><i class="fa fa-circle-o"></i> LPB Baru</a></li>
+            <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Daftar_lpb';?>"><i class="fa fa-circle-o"></i>Daftar LPB</a></li>
           </ul>
         </li>
       </ul>

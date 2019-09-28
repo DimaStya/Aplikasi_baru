@@ -70,8 +70,25 @@
                     <th scope="col">Jumlah Buku</th>
                     <th scope="col">Status Proses</th>
                   </tr>
+                  <tr class="GridViewScrollItem">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
                   <?php $no=1; foreach ($pesanan as $pesanan) { ?>
-                  <tr  class="GridViewScrollItem">
+                  <tr class="GridViewScrollItem">
                     <td><?php echo $no; ?></td>
                     <td><?php echo $pesanan['tanggal']; ?></td>
                     <td><?php echo $pesanan['no_pesanan']; ?></td>

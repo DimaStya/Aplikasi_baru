@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_pengajuan extends CI_Model{
 	public function Getpengajuan(){
-		$data = $this->db->query("SELECT tbl_pengajuan.*, tbl_mnasional.kode_nasional, tbl_mnasional.nama_nasional, tbl_marea.nama_area, tbl_perwakilan.alamat_perwakilan, tbl_perwakilan.nama_kaper, tbl_customer.nama_customer FROM tbl_perwakilan, tbl_customer, tbl_pengajuan, tbl_marea, tbl_mnasional WHERE tbl_pengajuan.kode_customer = tbl_customer.kode_customer AND tbl_customer.kode_perwakilan = tbl_perwakilan.kode_perwakilan AND tbl_perwakilan.kode_area = tbl_marea.kode_area AND tbl_mnasional.kode_nasional = tbl_marea.kode_nasional AND tbl_pengajuan.aktif='Aktif'");
+		$data = $this->db->query("SELECT tbl_pengajuan.*, tbl_mnasional.kode_nasional, tbl_mnasional.nama_nasional, tbl_marea.nama_area, tbl_perwakilan.alamat_perwakilan, tbl_perwakilan.nama_kaper, tbl_kerjasama.nama_kerjasama FROM tbl_perwakilan, tbl_kerjasama, tbl_pengajuan, tbl_marea, tbl_mnasional WHERE tbl_pengajuan.kode_kerjasama = tbl_kerjasama.kode_kerjasama AND tbl_kerjasama.kode_perwakilan = tbl_perwakilan.kode_perwakilan AND tbl_perwakilan.kode_area = tbl_marea.kode_area AND tbl_mnasional.kode_nasional = tbl_marea.kode_nasional AND tbl_pengajuan.aktif='Aktif'");
 		return $data;
 	}
 	public function Getkode(){

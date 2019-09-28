@@ -88,8 +88,8 @@
                 <div class="box-body">
                 <div class="form-group"> 
                   <div class="col-xs-6">
-                      <label>Nilai Rabat</label>
-                      <input type="text" class="form-control col-xs-6" name="rabat" id="rabat"  placeholder="Nilai Rabat Dalam %" required="" onKeyPress="return goodchars(event,'0123456789.',this)">
+                      <label>Nilai Fee</label>
+                      <input type="text" class="form-control col-xs-6" name="fee" id="fee"  placeholder="Nilai Fee Dalam %" required="" onKeyPress="return goodchars(event,'0123456789.',this)">
                   </div>
                 </div>
               </div>
@@ -156,8 +156,8 @@
                 <div class="box-body">
                 <div class="form-group"> 
                   <div class="col-xs-6">
-                      <label>Nilai Rabat</label>
-                      <input type="text" class="form-control col-xs-6" name="rabatedit" id="rabatedit"  placeholder="Nilai Rabat Dalam %" required="" onKeyPress="return goodchars(event,'0123456789.',this)">
+                      <label>Nilai Fee</label>
+                      <input type="text" class="form-control col-xs-6" name="feeedit" id="feeedit"  placeholder="Nilai Fee Dalam %" required="" onKeyPress="return goodchars(event,'0123456789.',this)">
                   </div>
                 </div>
               </div>
@@ -222,8 +222,8 @@
                 <div class="box-body">
                 <div class="form-group"> 
                   <div class="col-xs-6">
-                      <label>Nilai Rabat</label>
-                      <input type="text" class="form-control col-xs-6" name="rabatnew" id="rabatnew"  placeholder="Nilai Rabat Dalam %" required="" onKeyPress="return goodchars(event,'0123456789.',this)">
+                      <label>Nilai Fee</label>
+                      <input type="text" class="form-control col-xs-6" name="feenew" id="feenew"  placeholder="Nilai Fee Dalam %" required="" onKeyPress="return goodchars(event,'0123456789.',this)">
                   </div>
                 </div>
               </div>
@@ -257,7 +257,7 @@
                   <th>Perwakilan</th>
                   <th>Nama CV</th>
                   <th>Tanggal</th>
-                  <th>Rabat</th>
+                  <th>Fee</th>
                   <th>Status</th>
                   <th>Aksi</th>
                 </tr>
@@ -270,9 +270,9 @@
                      <td><?php echo $mou['alamat_perwakilan'];?></td>
                      <td><?php echo $mou['nama_cv'];?></td>
                      <td><?php echo $mou['tanggal'];?></td>
-                     <td><?php echo $mou['rabat'];?> %</td>
+                     <td><?php echo $mou['fee'];?> %</td>
                     <td><?php echo $mou['aktif'];?></td>
-                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal3' onclick="SetInput('','','','<?php echo $mou['kode_nasional'];?>','<?php echo $mou['no_mou'];?>','<?php echo $mou['tanggal'];?>','<?php echo $mou['nama_area'];?>','<?php echo $mou['alamat_perwakilan'];?>','<?php echo $mou['nama_cv'];?>','<?php echo $mou['rabat'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button type='button' class='btn-danger'><i class='fa fa-fw fa-repeat' data-toggle='modal' data-target='#myModal1' onclick="SetInput('','','<?php echo $mou['kode_cv'];?>','','<?php echo $mou['no_mou'];?>','','','<?php echo $mou['alamat_perwakilan'];?>','<?php echo $mou['nama_cv'];?>','')"></i></button></td></td>
+                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal3' onclick="SetInput('','','','<?php echo $mou['kode_nasional'];?>','<?php echo $mou['no_mou'];?>','<?php echo $mou['tanggal'];?>','<?php echo $mou['nama_area'];?>','<?php echo $mou['alamat_perwakilan'];?>','<?php echo $mou['nama_cv'];?>','<?php echo $mou['fee'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button type='button' class='btn-danger'><i class='fa fa-fw fa-repeat' data-toggle='modal' data-target='#myModal1' onclick="SetInput('','','<?php echo $mou['kode_cv'];?>','','<?php echo $mou['no_mou'];?>','','','<?php echo $mou['alamat_perwakilan'];?>','<?php echo $mou['nama_cv'];?>','')"></i></button></td></td>
                   </tr>
                   <?php $no++;} ?>
                 </tbody>

@@ -85,11 +85,11 @@
                   <?php $no=1; foreach ($data1 as $produksi) { ?>
                   <tr>
                     <td><?php echo $no;?></td>
-                     <td><?php echo $produksi['nama_admproduksi'];?></td>
+                     <td><?php echo $produksi['nama_produksi'];?></td>
                     <td><?php echo $produksi['email'];?></td>
                     <td><?php echo $produksi['no_telp'];?></td>
                     <td><?php echo $produksi['aktif'];?></td>
-                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('<?php echo $produksi['kode_admproduksi'];?>','<?php echo $produksi['nama_admproduksi'];?>','<?php echo $produksi['email'];?>','<?php echo $produksi['no_telp'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td></td>
+                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('<?php echo $produksi['kode_admproduksi'];?>','<?php echo $produksi['nama_produksi'];?>','<?php echo $produksi['email'];?>','<?php echo $produksi['no_telp'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td></td>
                   </tr>
                   <?php $no++;} ?>
                 </tbody>

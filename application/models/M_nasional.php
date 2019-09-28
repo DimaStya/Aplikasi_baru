@@ -6,12 +6,8 @@ class M_nasional extends CI_Model{
 		$data = $this->db->query("SELECT * FROM tbl_mnasional");
 		return $data;
 	}
-	public function Getkode(){
-		$data = $this->db->query("SELECT kode_nasional FROM tbl_mnasional");
-		return $data->result_array();
-	}
     public function Getkodenasional(){
-        $data = $this->db->query("SELECT kode_nasional FROM tbl_mnasional");
+        $data = $this->db->query("SELECT max(kode_nasional) FROM tbl_mnasional");
         return $data;
     }
 	public function Insert($table,$data){

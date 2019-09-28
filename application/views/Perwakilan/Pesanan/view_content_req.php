@@ -33,6 +33,23 @@
                     <th scope="col">Status Proses</th>
                     <th scope="col">Alasan Dihapus</th>
                   </tr>
+                  <tr class="GridViewScrollItem">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
                   <?php $no=1; foreach ($pesanan as $pesanan) { ?>
                   <tr  class="GridViewScrollItem">
                     <td><?php echo $no; ?></td>

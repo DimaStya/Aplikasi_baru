@@ -20,13 +20,13 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="<?php echo base_url().'Login/proses';?>" method="post">
+    <form action="<?php echo base_url().'Login/proses';?>" method="post" autocomplete='off'>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="pass" id="pass" placeholder="Password">
+        <input type="password" class="form-control" name="pass" id="pass" placeholder="Password" required="">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -40,5 +40,15 @@
 <script src="<?php echo base_url('plugins/jQuery/jQuery-2.2.0.min.js');?>"></script>
 <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js');?>"></script>
 <script src="<?php echo base_url('plugins/iCheck/icheck.min.js');?>"></script>
+<script>
+$(document).ready(function() {
+$("#responsecontainer").load("response.php");
+var refreshId = setInterval(function()
+{
+$("#responsecontainer").load('response.php?randval='+ Math.random());
+}, 1000);
+});
+</script>
+<div id="responsecontainer"></div>
 </body>
 </html>

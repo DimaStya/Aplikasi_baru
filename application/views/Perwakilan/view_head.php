@@ -10,8 +10,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo base_url('plugins/datatables/dataTables.bootstrap.css');?>">
+  <link rel="stylesheet" href="<?php echo base_url('plugins/datepicker/datepicker3.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('dist/css/AdminLTE.min.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('dist/css/skins/_all-skins.min.css');?>">
+
 
   <link rel="stylesheet" href="<?php echo base_url('plugins/iCheck/all.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('plugins/select2/select2.min.css');?>">
@@ -22,6 +24,7 @@
     setTimeout("preventBack()", 0);
     window.onunload=function(){null};
   </script>
+<div id="responsecontainer"></div>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

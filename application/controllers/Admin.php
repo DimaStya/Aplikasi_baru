@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 Class Admin extends CI_Controller{
 	function __construct(){
 		parent::__construct();
+		//$this->load->view("view");
 
 		$this->load->helper('cookie');
 		//hapus saat cookie sudah kadaluarsa
@@ -12,14 +13,14 @@ Class Admin extends CI_Controller{
 		$login=$cek_login->row_array();
 		if (is_array($login) || is_object($login)){
 			foreach ($login as $cek){
-			$hour = strtotime($login['tanggal']);
-	        if($hour<=strtotime($tanggal)){
-	        	$data  = array('cookie_user' => $cek['cookie_user']);
-        	 	$this->m_login->habis('tbl_login', $data);
-        	 	$cookie_name = 'Username';
-				unset($_COOKIE[$cookie_name]);
-				$res = setcookie($cookie_name, '', time() - 3600*4);
-	        }
+				$hour = strtotime($login['tanggal']);
+		        if($hour<=strtotime($tanggal)){
+		        	$data  = array('cookie_user' => $cek['cookie_user']);
+	        	 	$this->m_login->habis('tbl_login', $data);
+	        	 	$cookie_name = 'Username';
+					unset($_COOKIE[$cookie_name]);
+					$res = setcookie($cookie_name, '', time() - 3600*4);
+		        }
 			}
 		}
 		//batas hapus saat cookie sudah kadaluarsa
@@ -32,6 +33,10 @@ Class Admin extends CI_Controller{
 			if($cek_cookie->num_rows()==0){
 				redirect(base_url());
 			}else{
+				$user = $this->session->userdata('username');
+				if(empty($user)){
+					redirect('Login');
+				}
 				$login = $cek_cookie->row_array();
 				$cek_login = $this->m_login->user($login['username']);
 				$user = $cek_login->row_array();
@@ -177,13 +182,39 @@ Class Admin extends CI_Controller{
 		$this->load->view('Admin/view_content_customer',$data2);
 		$this->load->view('Admin/view_footer');
 	}
+	function Kerjasama(){
+		$data1 = $this->m_kerjasama->Getkerjasama();
+		$data3 = $this->m_nasional->Getnasional();
+		$data2 = array('data1' => $data1->result_array(), 'data2' => $data3->result_array());
+		$data = array(
+			        'angka' => '2',
+			        'menu' => '11'
+		         );
+		$this->load->view('Admin/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Admin/view_content_kerjasama',$data2);
+		$this->load->view('Admin/view_footer');
+	}
+	function Pengajuan(){
+		$data1 = $this->m_pengajuan->Getpengajuan();
+		$data3 = $this->m_nasional->Getnasional();
+		$data2 = array('data1' => $data1->result_array(), 'data2' => $data3->result_array());
+		$data = array(
+			        'angka' => '2',
+			        'menu' => '12'
+		         );
+		$this->load->view('Admin/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Admin/view_content_pengajuan',$data2);
+		$this->load->view('Admin/view_footer');
+	}
 	function Rekanan(){
 		$data1 = $this->m_rekanan->Getcv();
 		$data3 = $this->m_nasional->Getnasional();
 		$data2 = array('data1' => $data1->result_array(), 'data2' => $data3->result_array());
 		$data = array(
 			        'angka' => '2',
-			        'menu' => '11'
+			        'menu' => '13'
 		         );
 		$this->load->view('Admin/view_head');
 		$this->load->view('Admin/view_asside', $data);
@@ -196,7 +227,7 @@ Class Admin extends CI_Controller{
 		$data2 = array('data1' => $data1->result_array(), 'data2' => $data3->result_array());
 		$data = array(
 			        'angka' => '2',
-			        'menu' => '12'
+			        'menu' => '14'
 		         );
 		$this->load->view('Admin/view_head');
 		$this->load->view('Admin/view_asside', $data);
@@ -208,7 +239,7 @@ Class Admin extends CI_Controller{
 		$data2 = array('data' => $data1->result_array());
 		$data = array(
 			        'angka' => '2',
-			        'menu' => '13'
+			        'menu' => '15 '
 		         );
 		$this->load->view('Admin/view_head');
 		$this->load->view('Admin/view_asside', $data);
@@ -406,7 +437,7 @@ Class Admin extends CI_Controller{
 	function Proses_detpaket(){
 		$tambah = $this->input->post('tambah');
 		$kurang = $this->input->post('kurang');
-		if(!empty($tambah) ){
+		if(!empty($tambah) ){//tampilkan menambah
 			$data = array(
 				        'angka' => '4',
 				        'menu' => '4'
@@ -419,21 +450,32 @@ Class Admin extends CI_Controller{
 			$this->load->view('Admin/view_asside', $data);
 			$this->load->view('Admin/view_content_addpaket',$data2);
 			$this->load->view('Admin/view_footer');
-		}else if(!empty($kurang)){
-			print_r($this->input->post('hapus'));
-			echo "<br>";
-			print_r($this->input->post('kode_buku'));
+		}else if(!empty($kurang)){//proses kurang
+			$data_hapus = array();
+			$hapus = $this->input->post('hapus');
+			foreach ($hapus as $hapus) {
+				array_push($data_hapus, array('kode_buku' => $hapus));
+			}
+			// for ($i=0; $i < count($this->input->post('hapus')); $i++) {
+			// 	array_push($data_hapus, array('kode_buku' => $this->input->post('kode_buku')[$i]));
+			// }
+			if(count($hapus)>0){
+				$this->m_buku->Deletbuku($kurang, $data_hapus);
+			}
+			redirect(base_url('Admin/Detpaket/'.$kurang));
 		}
 		
 	}
 	function Aktivitas(){
+		$aktivitas = $this->m_login->Getaktivitas();
 		$data = array(
 			        'angka' => '5',
 			        'menu' => '0'
 		         );
+		$data2 = array('data1' => $aktivitas->result_array(), );
 		$this->load->view('Admin/view_head');
 		$this->load->view('Admin/view_asside', $data);
-		$this->load->view('Admin/view_content_aktivitas');
+		$this->load->view('Admin/view_content_aktivitas',$data2);
 		$this->load->view('Admin/view_footer');
 	}
 
@@ -463,5 +505,6 @@ Class Admin extends CI_Controller{
 		$this->load->view('Admin/view_content_tahun',$data2);
 		$this->load->view('Admin/view_footer');
 	}
+	
 }
 ?>

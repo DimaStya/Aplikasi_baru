@@ -44,6 +44,7 @@ Class Login extends CI_Controller{
 					$data = $cek_admper->row_array();
 					$this->session->set_userdata('username',$data['nama_admper']);
 					$this->session->set_userdata('alamat',$data['alamat_perwakilan']);
+					$this->session->set_userdata('kode_wilayah',$data['kode_wilayah']);
 					$this->session->set_userdata('kode_perwakilan',$data['kode_perwakilan']);
 					$this->session->set_userdata('kode_admper',$data['kode_admper']);
 					redirect('Perwakilan');
@@ -53,12 +54,24 @@ Class Login extends CI_Controller{
 					$this->session->set_userdata('username',$data['nama_admpusat']);
 					$this->session->set_userdata('kode_admpusat',$data['kode_admpusat']);
 					redirect('Pemasaran');
-				}else if($login['hak_akses']=='4'){//adm Pusat
-					$cek_admpusat = $this->m_login->Admgudang($login['kode']);
-					$data = $cek_admpusat->row_array();
+				}else if($login['hak_akses']=='3'){//adm Keuangan
+					$cek_admkeu = $this->m_login->Admkeu($login['kode']);
+					$data = $cek_admkeu->row_array();
+					$this->session->set_userdata('username',$data['nama_admkeuangan']);
+					$this->session->set_userdata('kode_admkeuangan',$data['kode_admkeuangan']);
+					redirect('Keuangan');
+				}else if($login['hak_akses']=='4'){//adm Gudang
+					$cek_admgudang = $this->m_login->Admgudang($login['kode']);
+					$data = $cek_admgudang->row_array();
 					$this->session->set_userdata('username',$data['nama_admgudang']);
 					$this->session->set_userdata('kode_admgudang',$data['kode_admgudang']);
 					redirect('Gudang');
+				}else if($login['hak_akses']=='5'){//adm Produksi
+					$cek_admproduksi = $this->m_login->Admproduksi($login['kode']);
+					$data = $cek_admproduksi->row_array();
+					$this->session->set_userdata('username',$data['nama_produksi']);
+					$this->session->set_userdata('kode_admproduksi',$data['kode_admproduksi']);
+					redirect('Produksi');
 				}
 			}else{
 				$this->load->view('v_login');
@@ -68,7 +81,7 @@ Class Login extends CI_Controller{
 	}
 	function proses(){
 		$username=htmlspecialchars($this->input->post('username',TRUE),ENT_QUOTES);
-        $pass=htmlspecialchars($this->input->post('pass',TRUE),ENT_QUOTES);
+        $pass=htmlspecialchars(md5($this->input->post('pass',TRUE)),ENT_QUOTES);
 		$cek_user = $this->m_login->cek($username,$pass);
 
 		if($cek_user->num_rows()==1){
@@ -104,6 +117,7 @@ Class Login extends CI_Controller{
 					$this->session->set_userdata('username',$data['nama_admper']);
 					$this->session->set_userdata('alamat',$data['alamat_perwakilan']);
 					$this->session->set_userdata('kode_perwakilan',$data['kode_perwakilan']);
+					$this->session->set_userdata('kode_wilayah',$data['kode_wilayah']);
 					$this->session->set_userdata('kode_admper',$data['kode_admper']);
 					redirect('Perwakilan');
 				}else if($user['hak_akses']=='2'){//adm Pusat
@@ -112,12 +126,24 @@ Class Login extends CI_Controller{
 					$this->session->set_userdata('username',$data['nama_admpusat']);
 					$this->session->set_userdata('kode_admpusat',$data['kode_admpusat']);
 					redirect('Pemasaran');
-				}else if($user['hak_akses']=='4'){//adm Pusat
-					$cek_admpusat = $this->m_login->Admgudang($user['kode']);
-					$data = $cek_admpusat->row_array();
+				}else if($user['hak_akses']=='3'){//adm Keuangan
+					$cek_admkeu = $this->m_login->Admgudang($user['kode']);
+					$data = $cek_admkeu->row_array();
+					$this->session->set_userdata('username',$data['nama_admkeuangan']);
+					$this->session->set_userdata('kode_admkeuangan',$data['kode_admkeuangan']);
+					redirect('Keuangan');
+				}else if($user['hak_akses']=='4'){//adm Gudang
+					$cek_admgudang = $this->m_login->Admgudang($user['kode']);
+					$data = $cek_admgudang->row_array();
 					$this->session->set_userdata('username',$data['nama_admgudang']);
 					$this->session->set_userdata('kode_admgudang',$data['kode_admgudang']);
 					redirect('Gudang');
+				}else if($user['hak_akses']=='5'){//adm Produksi
+					$cek_admproduksi = $this->m_login->Admproduksi($user['kode']);
+					$data = $cek_admproduksi->row_array();
+					$this->session->set_userdata('username',$data['nama_produksi']);
+					$this->session->set_userdata('kode_admproduksi',$data['kode_admproduksi']);
+					redirect('Produksi');
 				}
 
 			}

@@ -24,7 +24,7 @@
     <section class="content">
       <div class="box box-success">
         <div id="notifications"><?php echo $this->session->flashdata('pesan'); ?></div>
-        <form role="form" action="<?php echo base_url().'Proses/Add_paket'; ?>" autocomplete="off" method="POST">
+        <form role="form" action="<?php echo base_url().'Proses/Add_buku_paket/'.$kode_paket; ?>" autocomplete="off" method="POST">
             <div class="box-header with-border">
               <h3 class="box-title">Form Penambahan Buku Paket</h3>
             </div>

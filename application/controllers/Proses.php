@@ -30,32 +30,22 @@ Class Proses extends CI_Controller{
 		$data_hidden = $this->input->post('kode_nasional');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_nasional->Getkodenasional();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_nasional' => 'nas_10001',
-			        'nama_nasional' => $this->input->post('nama_nasional'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
+				$kode_asli = 'NAS_001';
 			}else{ //data lebih dari satu
-				$kode_nas= $this->m_nasional->getkode();
-				$kode = max($kode_nas);
-				$kode_nasional = array();
-				foreach ($kode as $key) {
-					$nas = explode("_", $kode['kode_nasional']);
-					array_push($kode_nasional,$nas['1']);
-				}
-				$kode_asli = max($kode_nasional)+1;
-
-				$data = array(
-					'kode_nasional' => 'nas_'.$kode_asli,
+				$angka =  explode('_', $kode_['max(kode_nasional)']);
+				$number = $angka[1];
+				$number = sprintf('%03d',$number+1);
+				$kode_asli = 'NAS_'.$number;
+			}
+			$data = array(
+					'kode_nasional' => $kode_asli,
 			        'nama_nasional' => $this->input->post('nama_nasional'),
 			        'email' => strtolower($this->input->post('email')),
 			        'no_telp' => $this->input->post('no_telp'),
 			        'aktif' => 'Aktif'
 		         );
-			}
 			$data1 = $this->m_nasional->Insert('tbl_mnasional', $data);
 			if ($data1){
 				$this->session->set_flashdata('pesan', 
@@ -98,8 +88,6 @@ Class Proses extends CI_Controller{
 			}
 			redirect(base_url().'Admin/Nasional');
 		}
-		
-
 	}
 	function Hapus_nasional($kode_nasional){
 		$kode_nasional = array('kode_nasional' => $kode_nasional);
@@ -122,28 +110,17 @@ Class Proses extends CI_Controller{
 		$data_hidden = $this->input->post('kode_area');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_area->Getkodearea();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_area' => 'area_10001',
-			        'kode_nasional' => $this->input->post('kode_nasional'),
-			        'nama_area' => $this->input->post('nama_area'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'area' => $this->input->post('area'),
-			        'aktif' => 'Aktif'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_area= $this->m_area->getkode();
-				$kode = max($kode_area);
-				$kode_area1 = array();
-				foreach ($kode as $key) {
-					$area = explode("_", $kode['kode_area']);
-					array_push($kode_area1,$area['1']);
-				}
-				$kode_asli = max($kode_area1)+1;
-
-				$data = array(
-					'kode_area' => 'area_'.$kode_asli,
+				$kode_asli = 'AREA_001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_area)']);
+				$number = $angka[1];
+				$number = sprintf('%03d',$number+1);
+				$kode_asli = 'AREA_'.$number;
+			}
+			$data = array(
+					'kode_area' => $kode_asli,
 					'kode_nasional' => $this->input->post('kode_nasional'),
 			        'nama_area' => $this->input->post('nama_area'),
 			        'email' => strtolower($this->input->post('email')),
@@ -151,8 +128,20 @@ Class Proses extends CI_Controller{
 			        'area' => $this->input->post('area'),
 			        'aktif' => 'Aktif'
 		         );
-			}
 			$data1 = $this->m_area->Insert('tbl_marea', $data);
+			if ($data1){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');   
+			}
 	   		redirect(base_url().'Admin/Area');
 		}else { //update
 			$data = array(
@@ -167,6 +156,19 @@ Class Proses extends CI_Controller{
 		        'kode_area' => $data_hidden,
 		    );
 			$data1 = $this->m_area->Update('tbl_marea', $data, $where);
+			if ($data1){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Update!!.</p>
+				                </div>');   
+			}
 		}
 		redirect(base_url().'Admin/Area');
 
@@ -188,44 +190,30 @@ Class Proses extends CI_Controller{
 		$data_hidden1 = $this->input->post('kode_areanew');
 		if (empty($data_hidden)&&empty($data_hidden1)){ //insert
 			$kode= $this->m_perwakilan->Getkodeperwakilan();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_perwakilan' => 'kaper_10001',
-			        'kode_area' => $this->input->post('kode_area'),
-			        'nama_kaper' => $this->input->post('nama_kaper'),
-			        'kode_wilayah' => $this->input->post('kode_wilayah'),
-			        'alamat_perwakilan' => $this->input->post('alamat_perwakilan'),
-			        'email' => strtolower($this->input->post('email')),
-			        'kawasan' => $this->input->post('kawasan'),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_perwakilan= $this->m_perwakilan->getkode();
-				$kode = max($kode_perwakilan);
-				$kode_perwakilan1 = array();
-				foreach ($kode as $key) {
-					$perwakilan = explode("_", $kode['kode_perwakilan']);
-					array_push($kode_perwakilan1,$perwakilan['1']);
-				}
-
-				$kode_asli = max($kode_perwakilan1)+1;
-				$data = array(
-					'kode_perwakilan' => 'kaper_'.$kode_asli,
-			        'kode_area' => $this->input->post('kode_area'),
-			        'nama_kaper' => $this->input->post('nama_kaper'),
-			        'kode_wilayah' => $this->input->post('kode_wilayah'),
-			        'alamat_perwakilan' => $this->input->post('alamat_perwakilan'),
-			        'email' => strtolower($this->input->post('email')),
-			        'kawasan' => $this->input->post('kawasan'),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
+				$kode_asli = 'KAPER_001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_perwakilan)']);
+				$number = $angka[1];
+				$number = sprintf('%03d',$number+1);
+				$kode_asli = 'KAPER_'.$number;
 			}
+			$data = array(
+					'kode_perwakilan' => $kode_asli,
+			        'kode_area' => $this->input->post('kode_area'),
+			        'nama_kaper' => $this->input->post('nama_kaper'),
+			        'kode_wilayah' => $this->input->post('kode_wilayah'),
+			        'alamat_perwakilan' => $this->input->post('alamat_perwakilan'),
+			        'email' => strtolower($this->input->post('email')),
+			        'kawasan' => $this->input->post('kawasan'),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
 			$insert = $this->m_perwakilan->Insert('tbl_perwakilan', $data);
 	   		redirect(base_url().'Admin/Perwakilan');
 
-		}else if (!empty($data_hidden) && empty($data_hidden1)) { //update
+		}else if (!empty($data_hidden) && empty($data_hidden1)) { //update saat kode perwakilan tidak kosong
 			$data = array(
 			        'kode_area' => $this->input->post('kode_area'),
 			        'nama_kaper' => $this->input->post('nama_kaper'),
@@ -241,18 +229,16 @@ Class Proses extends CI_Controller{
 		    );
 			$update = $this->m_perwakilan->Update('tbl_perwakilan', $data, $where);
 			redirect(base_url().'Admin/Perwakilan');
-		} else if(empty($data_hidden) && !empty($data_hidden1)){
-			$kode_perwakilan= $this->m_perwakilan->getkode();
-				$kode = max($kode_perwakilan);
-				$kode_perwakilan1 = array();
-				foreach ($kode as $key) {
-					$perwakilan = explode("_", $kode['kode_perwakilan']);
-					array_push($kode_perwakilan1,$perwakilan['1']);
-				}
+		} else if(empty($data_hidden) && !empty($data_hidden1)){ //update saat pergantian kaper
+			$kode= $this->m_perwakilan->Getkodeperwakilan();
+			$kode_ = $kode->row_array();//data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_perwakilan)']);
+				$number = $angka[1];
+				$number = sprintf('%03d',$number+1);
+				$kode_asli = 'KAPER_'.$number;
 
-				$kode_asli = max($kode_perwakilan1)+1;
 				$data = array(
-					'kode_perwakilan' => 'kaper_'.$kode_asli,
+					'kode_perwakilan' => $kode_asli,
 			        'kode_area' => $data_hidden1,
 			        'nama_kaper' => $this->input->post('nama_kapernew'),
 			        'kode_wilayah' => $this->input->post('kode_wilayahnew'),
@@ -266,7 +252,7 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Tidak Aktif'
 		         );
 				$data2 = array(
-			        'kode_perwakilan' => 'kaper_'.$kode_asli
+			        'kode_perwakilan' => $kode_asli
 		         );
 				$where = array(
 		        'kode_perwakilan' => $this->input->post('kode_perwakilanold'),
@@ -280,6 +266,7 @@ Class Proses extends CI_Controller{
 				$update = $this->m_perwakilan->Update('tbl_sales', $data2, $where);
 				$update = $this->m_perwakilan->Update('tbl_customer', $data2, $where);
 				$update = $this->m_perwakilan->Update('tbl_cvrekanan', $data2, $where);
+				$update = $this->m_perwakilan->Update('tbl_stokmini', $data2, $where);
 				redirect(base_url().'Admin/Perwakilan');
 		}
 
@@ -288,32 +275,22 @@ Class Proses extends CI_Controller{
 		$data_hidden = $this->input->post('kode_sales');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_sales->Getkodesales();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_sales' => 'sales_10001',
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_sales' => $this->input->post('nama_sales'),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_sales= $this->m_sales->getkode();
-				$kode = max($kode_sales);
-				$kode_sales1 = array();
-				foreach ($kode as $key) {
-					$sales = explode("_", $kode['kode_sales']);
-					array_push($kode_sales1,$sales['1']);
-				}
-
-				$kode_asli = max($kode_sales1)+1;
-				$data = array(
-					'kode_sales' => 'sales_'.$kode_asli,
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_sales' => $this->input->post('nama_sales'),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
+				$kode_asli = 'SALES_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_sales)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'SALES_'.$number;
 			}
+			$data = array(
+					'kode_sales' => $kode_asli,
+			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
+			        'nama_sales' => $this->input->post('nama_sales'),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
 			$insert = $this->m_sales->Insert('tbl_sales', $data);
 	   		redirect(base_url().'Admin/Sales');
 		}else { //update
@@ -344,46 +321,29 @@ Class Proses extends CI_Controller{
 		$data_hidden = $this->input->post('kode_admper');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_admperwakilan->Getkodeadmperwakilan();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_admper' => 'admper_10001',
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_admper' => $this->input->post('nama_admper'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'admper_10001',
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '1'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_admper= $this->m_admperwakilan->getkode();
-				$kode = max($kode_admper);
-				$kode_admperwakilan1 = array();
-				foreach ($kode as $key) {
-					$admperwakilan = explode("_", $kode['kode_admper']);
-					array_push($kode_admperwakilan1,$admperwakilan['1']);
-				}
-
-				$kode_asli = max($kode_admperwakilan1)+1;
-				$data = array(
-					'kode_admper' => 'admper_'.$kode_asli,
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_admper' => $this->input->post('nama_admper'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'admper_'.$kode_asli,
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '1'
-		         );
+				$kode_asli = 'ADMPER_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_admper)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'ADMPER_'.$number;
 			}
+			$data = array(
+					'kode_admper' => $kode_asli,
+			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
+			        'nama_admper' => strtoupper($this->input->post('nama_admper')),
+			        'email' => strtolower($this->input->post('email')),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
+				$data1 = array(
+					'kode' => $kode_asli,
+			        'username' => strtolower($this->input->post('email')),
+			        'pass' => '827ccb0eea8a706c4c34a16891f84e7b',
+			        'hak_akses' => '1'
+		         );
 		    $user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_admperwakilan->Insert('tbl_admper', $data);
 	   		redirect(base_url().'Admin/Adm_perwakilan');
@@ -422,44 +382,28 @@ Class Proses extends CI_Controller{
 		$data_hidden = $this->input->post('kode_admpusat');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_pemasaran->Getkodeadmpusat();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_admpusat' => 'pusat_10001',
-			        'nama_admpusat' => $this->input->post('nama_admpusat'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'pusat_10001',
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '2'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_admpusat= $this->m_pemasaran->getkode();
-				$kode = max($kode_admpusat);
-				$kode_admpusat1 = array();
-				foreach ($kode as $key) {
-					$admpusat = explode("_", $kode['kode_admpusat']);
-					array_push($kode_admpusat1,$admpusat['1']);
-				}
-				$kode_asli = max($kode_admpusat1)+1;
-
-				$data = array(
-					'kode_admpusat' => 'pusat_'.$kode_asli,
-			        'nama_admpusat' => $this->input->post('nama_admpusat'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'pusat_'.$kode_asli,
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '2'
-		         );
+				$kode_asli = 'PUSAT_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_admpusat)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'PUSAT_'.$number;
 			}
+			$data = array(
+					'kode_admpusat' => $kode_asli,
+			        'nama_admpusat' => strtoupper($this->input->post('nama_admpusat')),
+			        'email' => strtolower($this->input->post('email')),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
+				$data1 = array(
+					'kode' => $kode_asli,
+			        'username' => strtolower($this->input->post('email')),
+			        'pass' => '827ccb0eea8a706c4c34a16891f84e7b',
+			        'hak_akses' => '2'
+		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_pemasaran->Insert('tbl_admpusat', $data);
 	   		redirect(base_url().'Admin/Pemasaran');
@@ -500,45 +444,29 @@ Class Proses extends CI_Controller{
 	function Add_keuangan(){
 		$data_hidden = $this->input->post('kode_admkeuangan');
 		if (empty($data_hidden)){ //insert
-			$kode= $this->m_keuangan->Getadmkeuangan();
+			$kode= $this->m_keuangan->Getkodeadmkeuangan();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_admkeuangan' => 'keu_10001',
-			        'nama_admkeuangan' => $this->input->post('nama_admkeuangan'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'keu_10001',
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '3'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_admkeuangan= $this->m_keuangan->getkode();
-				$kode = max($kode_admkeuangan);
-				$kode_admkeuangan1 = array();
-				foreach ($kode as $key) {
-					$admkeuangan = explode("_", $kode['kode_admkeuangan']);
-					array_push($kode_admkeuangan1,$admkeuangan['1']);
-				}
-				$kode_asli = max($kode_admkeuangan1)+1;
-
-				$data = array(
-					'kode_admkeuangan' => 'keu_'.$kode_asli,
-			        'nama_admkeuangan' => $this->input->post('nama_admkeuangan'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'keu_'.$kode_asli,
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '3'
-		         );
+				$kode_asli = 'KEU_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_admkeuangan)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'KEU_'.$number;
 			}
+			$data = array(
+					'kode_admkeuangan' => $kode_asli,
+			        'nama_admkeuangan' => strtoupper($this->input->post('nama_admkeuangan')),
+			        'email' => strtolower($this->input->post('email')),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
+				$data1 = array(
+					'kode' => $kode_asli,
+			        'username' => strtolower($this->input->post('email')),
+			        'pass' => '827ccb0eea8a706c4c34a16891f84e7b',
+			        'hak_akses' => '3'
+		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_keuangan->Insert('tbl_admkeuangan', $data);
 	   		redirect(base_url().'Admin/Keuangan');
@@ -579,45 +507,29 @@ Class Proses extends CI_Controller{
 	function Add_gudang(){
 		$data_hidden = $this->input->post('kode_admgudang');
 		if (empty($data_hidden)){ //insert
-			$kode= $this->m_gudang->Getadmgudang();
+			$kode= $this->m_gudang->Getkodeadmgudang();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_admgudang' => 'gdg_10001',
-			        'nama_admgudang' => $this->input->post('nama_admgudang'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'gdg_10001',
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '4'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_admgudang= $this->m_gudang->getkode();
-				$kode = max($kode_admgudang);
-				$kode_admgudang1 = array();
-				foreach ($kode as $key) {
-					$admgudang = explode("_", $kode['kode_admgudang']);
-					array_push($kode_admgudang1,$admgudang['1']);
-				}
-				$kode_asli = max($kode_admgudang1)+1;
-
-				$data = array(
-					'kode_admgudang' => 'gdg_'.$kode_asli,
-			        'nama_admgudang' => $this->input->post('nama_admgudang'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'gdg_'.$kode_asli,
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '4'
-		         );
+				$kode_asli = 'GDG_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_admgudang)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'GDG_'.$number;
 			}
+			$data = array(
+					'kode_admgudang' => $kode_asli,
+			        'nama_admgudang' => strtoupper($this->input->post('nama_admgudang')),
+			        'email' => strtolower($this->input->post('email')),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
+				$data1 = array(
+					'kode' => $kode_asli,
+			        'username' => strtolower($this->input->post('email')),
+			        'pass' => '827ccb0eea8a706c4c34a16891f84e7b',
+			        'hak_akses' => '4'
+		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_gudang->Insert('tbl_admgudang', $data);
 	   		redirect(base_url().'Admin/Gudang');
@@ -658,51 +570,35 @@ Class Proses extends CI_Controller{
 	function Add_produksi(){
 		$data_hidden = $this->input->post('kode_admproduksi');
 		if (empty($data_hidden)){ //insert
-			$kode= $this->m_produksi->Getadmproduksi();
+			$kode= $this->m_produksi->Getkodeadmproduksi();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_admproduksi' => 'prod_10001',
-			        'nama_admproduksi' => $this->input->post('nama_admproduksi'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'prod_10001',
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '5'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_admproduksi= $this->m_produksi->getkode();
-				$kode = max($kode_admproduksi);
-				$kode_admproduksi1 = array();
-				foreach ($kode as $key) {
-					$admproduksi = explode("_", $kode['kode_admproduksi']);
-					array_push($kode_admproduksi1,$admproduksi['1']);
-				}
-				$kode_asli = max($kode_admproduksi1)+1;
-
-				$data = array(
-					'kode_admproduksi' => 'prod_'.$kode_asli,
-			        'nama_admproduksi' => $this->input->post('nama_admproduksi'),
-			        'email' => strtolower($this->input->post('email')),
-			        'no_telp' => $this->input->post('no_telp'),
-			        'aktif' => 'Aktif'
-		         );
-				$data1 = array(
-					'kode' => 'prod_'.$kode_asli,
-			        'username' => strtolower($this->input->post('email')),
-			        'pass' => '12345',
-			        'hak_akses' => '5'
-		         );
+				$kode_asli = 'PROD_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_admproduksi)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'PROD_'.$number;
 			}
+				$data = array(
+					'kode_admproduksi' => $kode_asli,
+			        'nama_produksi' => strtoupper($this->input->post('nama_admproduksi')),
+			        'email' => strtolower($this->input->post('email')),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
+				$data1 = array(
+					'kode' => $kode_asli,
+			        'username' => strtolower($this->input->post('email')),
+			        'pass' => '827ccb0eea8a706c4c34a16891f84e7b',
+			        'hak_akses' => '5'
+		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_produksi->Insert('tbl_admproduksi', $data);
 	   		redirect(base_url().'Admin/Produksi');
 		}else { //update
 			$data = array(
-			        'nama_admproduksi' => $this->input->post('nama_admproduksi'),
+			        'nama_produksi' => $this->input->post('nama_admproduksi'),
 			        'email' => strtolower($this->input->post('email')),
 			        'no_telp' => $this->input->post('no_telp'),
 			        'aktif' => 'Aktif'
@@ -737,32 +633,23 @@ Class Proses extends CI_Controller{
 		$data_hidden = $this->input->post('kode_customer');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_customer->Getkodecustomer();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_customer' => 'cust_10001',
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_customer' => $this->input->post('nama_customer'),
-			        'alamat_customer' => $this->input->post('alamat_customer'),
-			        'aktif' => 'Aktif'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_customer= $this->m_customer->Getkode();
-				$kode = max($kode_customer);
-				$kode_customer1 = array();
-				foreach ($kode as $key) {
-					$customer = explode("_", $kode['kode_customer']);
-					array_push($kode_customer1,$customer['1']);
-				}
-
-				$kode_asli = max($kode_customer1)+1;
-				$data = array(
-					'kode_customer' => 'cust_'.$kode_asli,
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_customer' => $this->input->post('nama_customer'),
-			        'alamat_customer' => $this->input->post('alamat_customer'),
-			        'aktif' => 'Aktif'
-		         );
+				$kode_asli = 'CSTM_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_customer)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'CSTM_'.$number;
 			}
+			$data = array(
+					'kode_customer' => $kode_asli,
+			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
+			        'nama_customer' => strtoupper($this->input->post('nama_customer')),
+			        'alamat_customer' => $this->input->post('alamat_customer'),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
 			$insert = $this->m_customer->Insert('tbl_customer', $data);
 	   		redirect(base_url().'Admin/Customer');
 		}else { //update
@@ -789,47 +676,137 @@ Class Proses extends CI_Controller{
 	    redirect(base_url().'Admin/Customer');
 		
 	}
+	function Add_kerjasama(){
+		$data_hidden = $this->input->post('kode_kerjasama');
+		if (empty($data_hidden)){ //insert
+			$kode= $this->m_kerjasama->Getkodekerjasama();
+			$kode_ = $kode->row_array();
+			if($kode->num_rows()==0){ //data pertama
+				$kode_asli = 'KJSM_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_kerjasama)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'KJSM_'.$number;
+			}
+				$data = array(
+					'kode_kerjasama' => $kode_asli,
+			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
+			        'nama_kerjasama' => strtoupper($this->input->post('nama_kerjasama')),
+			        'alamat_kerjasama' => $this->input->post('alamat_kerjasama'),
+			        'aktif' => 'Aktif'
+		         );
+			$insert = $this->m_rekanan->Insert('tbl_kerjasama', $data);
+	   		redirect(base_url().'Admin/Kerjasama');
+		}else { //update
+			$data = array(
+			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
+			        'nama_kerjasama' => $this->input->post('nama_kerjasama'),
+			        'alamat_kerjasama' => $this->input->post('alamat_kerjasama'),
+			        'aktif' => 'Aktif'
+		         );
+			$where = array(
+		        'kode_kerjasama' => $data_hidden,
+		    );
+			$insert = $this->m_kerjasama->Update('tbl_kerjasama', $data, $where);
+		}
+		redirect(base_url().'Admin/Kerjasama');
 
+	}
+	function Hapus_kerjasama($kode_kerjasama){
+		$kode_kerjasama1 = array('kode_kerjasama' => $kode_kerjasama);
+		$data = array(
+			        'aktif' => 'Tidak Aktif'
+		         );
+	    $this->m_kerjasama->Resign('tbl_kerjasama', $data, $kode_kerjasama1);
+	    redirect(base_url().'Admin/Kerjasama');
+		
+	}
+	function Add_pengajuan(){
+		//untuk Penggantian data mou
+        $kerjasamaold = $this->input->post('kode_kerjasamaold');
+        $pengajuanold = $this->input->post('no_pengajuanold');
+        //untuk perubahan data mou
+        $pengajuanedit = $this->input->post('no_pengajuanhidden');
+        ///////////////////////////////////////////
+
+        ///////////////////////////////////////////
+        //insert
+        if(empty($kerjasamaold) && empty($pengajuanold) && empty($pengajuanedit)){
+        	//insert data post
+        	$data = array(
+					'no_pengajuan' => $this->input->post('no_pengajuan'),
+			        'kode_kerjasama' => $this->input->post('kode_kerjasama'),
+			        'tanggal' => $this->input->post('tanggal'),
+			        'rabat' => $this->input->post('rabat'),
+			        'aktif' => 'Aktif'
+		         );
+			$insert = $this->m_pengajuan->Insert('tbl_pengajuan', $data);
+        }
+        //update
+        else if(empty($kerjasamaold) && empty($pengajuanold) && !empty($pengajuanedit)){
+        	//update data dengan where $mouedit
+        	$where = array('no_pengajuan' => $pengajuanedit, );
+        	$data = array(
+					'no_pengajuan' => $this->input->post('no_pengajuanedit'),
+			        'tanggal' => $this->input->post('tanggaledit'),
+			        'rabat' => $this->input->post('rabatedit'),
+			        'aktif' => 'Aktif'
+		         );
+			$insert = $this->m_pengajuan->Update('tbl_pengajuan', $data, $where);
+        }
+        //ganti
+        else if(!empty($kerjasamaold) && !empty($pengajuanold) && empty($pengajuanedit)){
+        	//update data mouold menjadi tidak aktif, buat data baru no_mounew
+
+        	$where = array('no_pengajuan' => $pengajuanold, );
+        	$data = array(
+					'no_pengajuan' => $this->input->post('no_pengajuannew'),
+			        'kode_kerjasama' => $this->input->post('kode_kerjasamaold'),
+			        'tanggal' => $this->input->post('tanggalnew'),
+			        'rabat' => $this->input->post('rabatnew'),
+			        'aktif' => 'Aktif'
+		         );
+        	$data2 = array('aktif' => 'Tidak Aktif', );
+			$update = $this->m_pengajuan->Update('tbl_pengajuan', $data2, $where);
+			$insert = $this->m_pengajuan->Insert('tbl_pengajuan', $data);
+        }
+		redirect(base_url().'Admin/Pengajuan');
+	}
 	function Add_cv(){
 		$data_hidden = $this->input->post('kode_cv');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_rekanan->Getkodecv();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_cv' => 'cv_10001',
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_cv' => $this->input->post('nama_cv'),
-			        'aktif' => 'Aktif'
-		         );
-			}else{ //data nomer lebih dari satu
-				$kode_cv= $this->m_rekanan->Getkode();
-				$kode = max($kode_cv);
-				$kode_cv1 = array();
-				foreach ($kode as $key) {
-					$cv = explode("_", $kode['kode_cv']);
-					array_push($kode_cv1,$cv['1']);
-				}
-
-				$kode_asli = max($kode_cv1)+1;
-				$data = array(
-					'kode_cv' => 'cv_'.$kode_asli,
-			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
-			        'nama_cv' => $this->input->post('nama_cv'),
-			        'aktif' => 'Aktif'
-		         );
+				$kode_asli = 'CV_0001';
+			}else{ //data lebih dari satu
+				$angka =  explode('_', $kode_['max(kode_cv)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'CV_'.$number;
 			}
+				$data = array(
+					'kode_cv' => $kode_asli,
+			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
+			        'nama_cv' => strtoupper($this->input->post('nama_cv')),
+			        'alamat_cv' => $this->input->post('alamat_cv'),
+			        'no_telp' => $this->input->post('no_telp'),
+			        'aktif' => 'Aktif'
+		         );
 			$insert = $this->m_rekanan->Insert('tbl_cvrekanan', $data);
 	   		redirect(base_url().'Admin/Rekanan');
 		}else { //update
 			$data = array(
 			        'kode_perwakilan' => $this->input->post('kode_perwakilan'),
 			        'nama_cv' => $this->input->post('nama_cv'),
+			        'alamat_cv' => $this->input->post('alamat_cv'),
 			        'aktif' => 'Aktif'
 		         );
 			$where = array(
 		        'kode_cv' => $data_hidden,
 		    );
-			$insert = $this->m_customer->Update('tbl_cvrekanan', $data, $where);
+			$insert = $this->m_rekanan->Update('tbl_cvrekanan', $data, $where);
 		}
 		redirect(base_url().'Admin/Rekanan');
 
@@ -859,7 +836,7 @@ Class Proses extends CI_Controller{
 					'no_mou' => $this->input->post('no_mou'),
 			        'kode_cv' => $this->input->post('kode_cv'),
 			        'tanggal' => $this->input->post('tanggal'),
-			        'rabat' => $this->input->post('rabat'),
+			        'fee' => $this->input->post('fee'),
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_rekanan->Insert('tbl_mou', $data);
@@ -871,7 +848,7 @@ Class Proses extends CI_Controller{
         	$data = array(
 					'no_mou' => $this->input->post('no_mouedit'),
 			        'tanggal' => $this->input->post('tanggaledit'),
-			        'rabat' => $this->input->post('rabatedit'),
+			        'fee' => $this->input->post('feeedit'),
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_rekanan->Update('tbl_mou', $data, $where);
@@ -885,7 +862,7 @@ Class Proses extends CI_Controller{
 					'no_mou' => $this->input->post('no_mounew'),
 			        'kode_cv' => $this->input->post('kode_cvold'),
 			        'tanggal' => $this->input->post('tanggalnew'),
-			        'rabat' => $this->input->post('rabatnew'),
+			        'fee' => $this->input->post('feenew'),
 			        'aktif' => 'Aktif'
 		         );
         	$data2 = array('aktif' => 'Tidak Aktif', );
@@ -898,26 +875,19 @@ Class Proses extends CI_Controller{
 		$data_hidden = $this->input->post('kode_penerbit');
 		if (empty($data_hidden)){ //insert
 			$kode= $this->m_penerbit->Getkodepenerbit();
+			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$data = array(
-					'kode_penerbit' => 'terbit_10001',
-			        'nama_penerbit' => $this->input->post('nama_penerbit')
-		         );
+				$kode_asli = 'PNB_0001';
 			}else{ //data lebih dari satu
-				$kode_nas= $this->m_penerbit->getkode();
-				$kode = max($kode_nas);
-				$kode_penerbit = array();
-				foreach ($kode as $key) {
-					$nas = explode("_", $kode['kode_penerbit']);
-					array_push($kode_penerbit,$nas['1']);
-				}
-				$kode_asli = max($kode_penerbit)+1;
-
-				$data = array(
-					'kode_penerbit' => 'terbit_'.$kode_asli,
-			        'nama_penerbit' => $this->input->post('nama_penerbit')
-		         );
+				$angka =  explode('_', $kode_['max(kode_penerbit)']);
+				$number = $angka[1];
+				$number = sprintf('%04d',$number+1);
+				$kode_asli = 'PNB_'.$number;
 			}
+				$data = array(
+					'kode_penerbit' => $kode_asli,
+			        'nama_penerbit' => strtoupper($this->input->post('nama_penerbit'))
+		         );
 			$data1 = $this->m_penerbit->Insert('tbl_penerbit', $data);
 	   		redirect(base_url().'Admin/Penerbit');
 		}else { //update
@@ -943,9 +913,10 @@ Class Proses extends CI_Controller{
 				'kelas' => $this->input->post('kelas'),
 				'tipe' => $this->input->post('tipe'),
 				'kurikulum' => $this->input->post('kurikulum'),
-				'judul' => $this->input->post('judul'),
+				'judul' => strtoupper($this->input->post('judul')),
 				'stok_real' => 0,
-				'stok_pesan' => 0
+				'stok_pesan' => 0,
+				'stok_mini' => 0,
 	         );
 			$data_harga = array(
 				'kode_buku' => $this->input->post('kode_buku'),
@@ -1014,21 +985,51 @@ Class Proses extends CI_Controller{
 	}
 	function Add_paket(){
 		$nama_paket = $this->input->post('nama_paket');
-		$mkode = $this->m_buku->Getnopaket();
-		if(count($mkode) < 1){
-				$kode_paket = 'PKT_001';
-			}else{
-				$angka =  explode('_', $mkode[0]['MAX(kode_paket)']);
-				$number = $angka[1];
-				$number = sprintf('%03d',$number+1);
-				$kode_paket = 'PKT_'.$number;
-			}
-		$data = array('kode_paket' => $kode_paket,
-						'nama_paket' => $nama_paket);
+		$kode_paket = $this->input->post('kode_paket');
+		if(empty($kode_paket)){
+			$mkode = $this->m_buku->Getnopaket();
+			if(count($mkode) < 1){
+					$kode_paket = 'PKT_001';
+				}else{
+					$angka =  explode('_', $mkode[0]['MAX(kode_paket)']);
+					$number = $angka[1];
+					$number = sprintf('%03d',$number+1);
+					$kode_paket = 'PKT_'.$number;
+				}
+			$data = array('kode_paket' => $kode_paket,
+							'nama_paket' => strtoupper($nama_paket));
+			
+			$insert = $this->m_buku->Insert('tbl_paket', $data);
+		}else{
+			$data = array('nama_paket' => $nama_paket, );
+			$where = array('kode_paket' => $kode_paket,);
+			$update = $this->m_buku->Update('tbl_paket', $data, $where);
+		}
 		
-		$insert = $this->m_buku->Insert('tbl_paket', $data);
 		redirect(base_url().'Admin/Paket');
 
+	}
+	function Hapus_paket($kode_paket = ''){
+		if(!empty($kode_paket)){
+			$where = array('kode_paket' => $kode_paket,);
+			$insert = $this->m_buku->Delete('tbl_paket', $where);
+			redirect(base_url().'Admin/Paket');
+		}
+	}
+	function Add_buku_paket($kode_paket){
+		$tambah = $this->input->post('tambah');
+		$data_tambah = array();
+		foreach ($tambah as $tambah) {
+			array_push($data_tambah, array('kode_buku' => $tambah, 'kode_paket' => $kode_paket,));
+		}
+		if(count($data_tambah)>0){
+			$this->m_buku->save_batch('tbl_detpaket', $data_tambah);
+		}
+		redirect(base_url('Admin/Detpaket/'.$kode_paket));
+		//print_r($data_tambah);
+		// for ($i=0; $i < count($this->input->post('tambah'))  ; $i++) { 
+		// 	echo $this->input->post('kode_buku')[$i];
+		// }
 	}
 	function Add_tahun(){
 		$tahun = $this->input->post('tahun');
@@ -1061,28 +1062,45 @@ Class Proses extends CI_Controller{
 		date_default_timezone_set("Asia/Jakarta");
 		$no_pesanan = $this->input->post('no_pesan');
 		$no_mou = $this->input->post('no_mou');
+		$no_pengajuan = $this->input->post('no_pengajuan');
 		$kode_customer = $this->input->post('kode_customer');
 		$kode_perwakilan = $this->session->userdata('kode_perwakilan');
 		$kode_admper = $this->session->userdata('kode_admper');
 		$kode_sales = $this->input->post('kode_sales');
 		$tanggal = date('Y-m-d');
 		$tahun_sek= date('Y');
-		$tipe_buku = $this->input->post('tipe_buku');
-		$jenjang = $this->input->post('jenjang');
 		$sumber_dana = $this->input->post('sumber_dana');
 		$nama_penerima = $this->input->post('nama_penerima');
 		$alamat_penerima = $this->input->post('alamat_penerima');
+		$keterangan = $this->input->post('keterangan');
 		$no_telp = $this->input->post('no_telp');
 		$tipe_pesan = 'Jual';
 		$proses = 'Menunggu DO';
 		$alasan = '-';
 		$jenis_pembayaran = $this->input->post('jenis_pembayaran');
-
+		$paket = $this->input->post('kode_paket');
+		$stok = $this->input->post('stok');
+		if (empty($paket)){
+			if($stok == 'stok_real'){
+				$tipe_buku = $this->input->post('tipe_buku');
+				$jenjang = $this->input->post('jenjang');
+			}else if ($stok == 'stok_mini') {
+				$tipe_buku = $this->input->post('tipe_buku_mini');
+				$jenjang = $this->input->post('jenjang_mini');
+			}
+		}else if(!empty($paket)){
+			$nama_paket = explode('&', $paket);
+			$tipe_buku = 'Buku Paket';
+			$jenjang = $nama_paket[1];
+		}
+		
 
 		$kode_buku = $this->input->post('kode_buku');
+		$harga = $this->input->post('harga');
 		$jumlah = $this->input->post('jumlah');
 		$data_pesan = array('no_pesanan' => $no_pesanan,
 							'no_mou' => $no_mou,
+							'no_pengajuan' => $no_pengajuan,
 							'kode_customer' => $kode_customer,
 							'kode_perwakilan' => $kode_perwakilan,
 							'kode_admper' => $kode_admper,
@@ -1097,23 +1115,38 @@ Class Proses extends CI_Controller{
 							'no_telp_penerima' => $no_telp ,
 							'tipe_pesan' => $tipe_pesan ,
 							'proses' => $proses ,
+							'stok' => $stok ,
 							'alasan' => $alasan,
-							'jenis_pembayaran' => $jenis_pembayaran  );
+							'jenis_pembayaran' => $jenis_pembayaran,
+							'keterangan' => $keterangan  );
 		$data = array();
-		$no =0;
-		foreach ($jumlah as $datajumlah) {
-			if ($datajumlah >0){
-				array_push($data, array('no_pesanan' => $no_pesanan,
-				'jumlah_beli' => $datajumlah,
-				'jumlah_kirim' => 0,
-				'sisa_kirim' => $datajumlah,
-				'kode_buku' => $kode_buku[$no], ));
+		if (empty($paket)){
+			$no =0;
+			foreach ($jumlah as $datajumlah) {
+				if ($datajumlah >0){
+					array_push($data, array('no_pesanan' => $no_pesanan,
+					'jumlah_beli' => $datajumlah,
+					'harga' => $harga[$no],
+					'ket' => $stok,
+					'kode_buku' => $kode_buku[$no], ));
+				}
+			$no++;
 			}
-		$no++;
+		}else if(!empty($paket)){
+			$no =0;
+			foreach ($kode_buku as $kode_buku) {
+				array_push($data, array('no_pesanan' => $no_pesanan,
+				'jumlah_beli' => $jumlah,
+				'harga' => $harga[$no],
+				'ket' => $stok,
+				'kode_buku' => $kode_buku, ));
+				$no++;
+			}
 		}
+		
 		if(count($data) > 0){
 			$this->m_pesan->save_pesanan($data_pesan);
-			$this->m_pesan->save_batch($data);
+			$this->m_pesan->save_batch('tbl_datapesan',$data);
 			$this->session->set_flashdata('pesan', 
 				                '<div class="alert alert-success">
 				                    <h4>Berhasil </h4>
@@ -1129,6 +1162,58 @@ Class Proses extends CI_Controller{
 			redirect(base_url().'Perwakilan/Pesan');
 		}
 	}
+	function Add_pesan_stokmini(){
+		date_default_timezone_set("Asia/Jakarta");
+		$no_stokmini = $this->input->post('no_stokmini');
+		$alamat_kirim = $this->input->post('alamat_kirim');
+		$keterangan = $this->input->post('keterangan');
+		date_default_timezone_set("Asia/Jakarta");
+		$tanggal = date('Y-m-d');
+		$kode_perwakilan = $this->session->userdata('kode_perwakilan');
+		$kode_admper = $this->session->userdata('kode_admper');
+
+		$kode_buku = $this->input->post('kode_buku');
+		$harga = $this->input->post('harga');
+		$jumlah = $this->input->post('jumlah');
+		$data_pesan = array('no_stokmini' => $no_stokmini,
+							'alamat_kirim' => $alamat_kirim,
+							'kode_perwakilan' => $kode_perwakilan,
+							'kode_admper' => $kode_admper,
+							'tanggal' => $tanggal,
+							'keterangan' => $keterangan);
+		$kode_buku = $this->input->post('kode_buku');
+		$jumlah = $this->input->post('jumlah');
+		$data = array();
+		if (empty($paket)){
+			$no =0;
+			foreach ($jumlah as $datajumlah) {
+				if ($datajumlah >0){
+					array_push($data, array('no_stokmini' => $no_stokmini,
+					'jumlah' => $datajumlah,
+					'kode_buku' => $kode_buku[$no], ));
+				}
+			$no++;
+			}
+		}
+		
+		if(count($data) > 0){
+			$this->m_perwakilan->Insert('tbl_pesan_stokmini',$data_pesan);
+			$this->m_pesan->save_batch('tbl_buku_psnstk',$data);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Pesanan Berhasil di Buat...</p>
+				                </div>'); 
+			redirect(base_url().'Perwakilan/Pesanan_stokmini');
+		}else{
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Pesanan Tidak Diproses tanpa pemilihan buku!!.</p>
+				                </div>');
+			redirect(base_url().'Perwakilan/Pesan_stokmini');
+		}
+	}
 	function Ubah_jumlah(){
 		$no_pesanan = $this->input->post('no_pesanan');
 		$kode_buku = $this->input->post('kode_buku');
@@ -1140,8 +1225,6 @@ Class Proses extends CI_Controller{
 		foreach ($jumlah as $datajumlah) {
 			if ($datajumlah > 0){
 				array_push($data, array('jumlah_beli' => $datajumlah,
-				'jumlah_kirim' => 0,
-				'sisa_kirim' => $datajumlah,
 				'kode_buku' => $kode_buku[$no], ));
 			}else if($datajumlah == 0){
 				array_push($data_hapus, array('kode_buku' => $kode_buku[$no]));
@@ -1178,8 +1261,6 @@ Class Proses extends CI_Controller{
 			if ($datajumlah >0){
 				array_push($data, array('no_pesanan' => $no_pesanan,
 				'jumlah_beli' => $datajumlah,
-				'jumlah_kirim' => 0,
-				'sisa_kirim' => $datajumlah,
 				'kode_buku' => $kode_buku[$no], ));
 			}
 		$no++;
@@ -1201,6 +1282,74 @@ Class Proses extends CI_Controller{
 			redirect(base_url().'Perwakilan/Pesanan');
 		}
 		
+	}
+	function Add_bkm(){
+		date_default_timezone_set("Asia/Jakarta");
+		$tanggal = date('Y-m-d');
+		$array_bln= array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+		$bulan_sek= $array_bln[date('n')];
+		$no =$this->input->post('no_kas');
+		$bank =$this->input->post('bank');
+		$nama_penyetor =$this->input->post('nama_penyetor');
+		$total =$this->input->post('total');
+		$no_kas = $no.'/'.$bulan_sek.'/'.date('Y');
+		$data_bkm = array('no_kas' => $no_kas,
+						  'bank' => $bank,
+						  'nama_penyetor' => $nama_penyetor,
+						  'tanggal' => $tanggal,
+						  'terpakai' => 0,
+						  'kode_admkeuangan' => $this->session->userdata('kode_admkeuangan'),
+						  'total' => $total, );
+		$in_bkm = $this->m_keuangan->Insert('tbl_kas', $data_bkm);
+		if($in_bkm){
+			$this->session->set_userdata('no_kas',$no_kas);
+			redirect(base_url().'Keuangan/Bayar');
+		}
+	}
+	function Add_retur(){
+		date_default_timezone_set("Asia/Jakarta");
+		$no_do = $this->input->post('no_do');
+		$no_suratjalan = $this->input->post('no_suratjalan');
+		$kode_buku = $this->input->post('kode_buku');
+		$jum_retur = $this->input->post('jum_retur');
+		$harga = $this->input->post('harga');
+		$no_suratretur = $this->input->post('no_suratretur');
+		$alasan = $this->input->post('alasan');
+		$tanggal = date('Y-m-d');		
+		$data_suratretur = array(
+							'no_suratjalan' => $no_suratjalan[0],
+							'tanggal' => $tanggal,
+							'no_suratretur' => $no_suratretur,
+							'alasan' => $alasan,
+							'keterangan' => 'Menunggu Admin');
+		$data = array();
+		$no =0;
+		foreach ($jum_retur as $jum_retur) {
+			if($jum_retur > 0){
+				array_push($data, array('no_suratretur' => $no_suratretur,
+					'no_suratjalan' => $no_suratjalan[$no],
+					'no_do' => $no_do[$no],
+					'jumlah' => $jum_retur,
+					'kode_buku' => $kode_buku[$no],
+					'harga' => $harga[$no],));
+			}
+			
+			$no++;
+		}
+		
+		if(count($data) > 0){
+			$this->m_perwakilan->Insert('tbl_suratretur',$data_suratretur);
+			$this->m_pesan->save_batch('tbl_buku_reqretur',$data);
+			$this->session->set_userdata('no_suratretur',$no_suratretur);
+			redirect(base_url().'Perwakilan/Cetak');
+		}else{
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Retur Tidak Diproses tanpa pemilihan buku!!.</p>
+				                </div>');
+			redirect(base_url().'Perwakilan/TerFaktur');
+		}
 	}
 
 

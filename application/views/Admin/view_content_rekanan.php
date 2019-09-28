@@ -73,6 +73,22 @@
                   </div>
                 </div>
               </div>
+              <div class="box-body">
+                <div class="form-group"> 
+                  <div class="col-xs-6">
+                      <label>No Telp</label>
+                      <input type="text" class="form-control col-xs-6" name="no_telp" id="no_telp"  placeholder="No Telp CV" required="" onkeypress="return hanyaAngka(event)">
+                  </div>
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="form-group"> 
+                  <div class="col-xs-6">
+                      <label>Alamat Cv. Rekanan</label>
+                      <textarea style="resize:none;width:250px;height:100px;" class="form-control col-xs-6" name="alamat_cv" id="alamat_cv"  placeholder="Alamat Cv. Rekanan" required=""></textarea>
+                  </div>
+                </div>
+              </div>
                 <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
@@ -89,7 +105,7 @@
     <section class="content">
       <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Data cv</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','','','','')">+</button>
+              <h3 class="box-title">Data cv</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','','','','','')">+</button>
       
             </div>
             <div class="box-body">
@@ -99,7 +115,9 @@
                 <tr>
                   <th>No</th>
                   <th>Nama CV</th>
+                  <th>No Telp</th>
                   <th>Perwakilan</th>
+                  <th>Alamat CV</th>
                   <th>Status</th>
                   <th>Aksi</th>
                 </tr>
@@ -109,9 +127,11 @@
                   <tr>
                     <td><?php echo $no;?></td>
                      <td><?php echo $cv['nama_cv'];?></td>
+                     <td><?php echo $cv['no_telp'];?></td>
                     <td><?php echo $cv['alamat_perwakilan'];?></td>
+                    <td><?php echo $cv['alamat_cv'];?></td>
                     <td><?php echo $cv['aktif'];?></td>
-                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('','','<?php echo $cv['kode_cv'];?>','<?php echo $cv['kode_nasional'];?>','<?php echo $cv['nama_area'];?>','<?php echo $cv['alamat_perwakilan'];?>','<?php echo $cv['nama_cv'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td></td>
+                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('','','<?php echo $cv['kode_cv'];?>','<?php echo $cv['kode_nasional'];?>','<?php echo $cv['nama_area'];?>','<?php echo $cv['alamat_perwakilan'];?>','<?php echo $cv['nama_cv'];?>','<?php echo $cv['no_telp'];?>,'<?php echo $cv['alamat_cv'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td></td>
                   </tr>
                   <?php $no++;} ?>
                 </tbody>

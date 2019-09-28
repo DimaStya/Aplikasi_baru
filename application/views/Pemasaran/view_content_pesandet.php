@@ -102,28 +102,35 @@
                  <td width="25%">: <?php echo $pesanan['nama_kaper']; ?></td>
                </tr> 
                <tr>
-                 <th width="15%">Rabat</th>
-                 <td width="25%">: <?php echo $pesanan['rabat']; ?> %</td>
+                 <th width="15%">Kerjasama</th>
+                 <td width="25%">: <?php echo $pesanan['nama_kerjasama']; ?></td>
                  <td width="20%"></td>
                  <th width="15%">Tipe Buku</th>
                  <td width="25%">: <?php echo $pesanan['tipe_buku']; ?></td>
                </tr>
                <tr>
-                 <th width="15%"></th>
-                 <td width="25%"></td>
+                 <th width="15%">No Pengajuan</th>
+                 <td width="25%">: <?php echo $pesanan['no_pengajuan']; ?></td>
                  <td width="20%"></td>
-                 <th width="15%">Jenis Pemabayaran</th>
+                 <th width="15%">Jenis Pembayaran</th>
                  <td width="25%">: <?php echo $pesanan['jenis_pembayaran']; ?></td>
                </tr>  
                <tr>
-                 <th width="15%">Nama Penerima</th>
-                 <td width="25%">: <?php echo $pesanan['nama_penerima']; ?></td>
+                 <th width="15%"></th>
+                 <td width="25%"></td>
                  <td width="20%"></td>
                  <th width="15%">Sumber Dana</th>
                  <td width="25%">: <?php echo $pesanan['sumber_dana']; ?></td>
-               </tr> 
+               </tr>
                <tr>
-                 <th width="15%">No Telp Penerima</th>
+                 <th width="15%">Nama Pelanggan</th>
+                 <td width="25%">: <?php echo $pesanan['nama_penerima']; ?></td>
+                 <td width="20%"></td>
+                 <th width="15%"></th>
+                 <td width="25%"></td>
+               </tr>
+               <tr>
+                 <th width="15%">No Telp Pelanggan</th>
                  <td width="25%">: <?php echo $pesanan['no_telp_penerima']; ?></td>
                  <td width="20%"></td>
                  <th width="15%"></th>
@@ -134,22 +141,33 @@
                  <td colspan="2" width="25%">: <?php echo $pesanan['alamat_penerima']; ?></td>
                  <th width="15%"></th>
                  <td width="25%"></td>
-               </tr> 
+               </tr>
+               <tr>
+                 <td colspan="5"> &nbsp; </td>
+               </tr>
+               <tr>
+                 <th width="15%">Keterangan</th>
+                 <td colspan="2" width="25%">: <?php echo $pesanan['keterangan'].' // '.$pesanan['stok']; ?></td>
+                 <th width="15%"></th>
+                 <td width="25%"></td>
+               </tr>
             </table>
             <br>
             <hr>
             <form action="<?php echo base_url().'Pemasaran/Simpando/';?>" method="POST">
             <input type="hidden" name="no_pesanan" id="no_pesanan" value="<?php echo $pesanan['no_pesanan'];?>">
+            <input type="hidden" name="stok" id="stok" value="<?php echo $pesanan['stok'];?>">
             <table width="100%">
               <tr class="GridViewScrollHeader">
                 <th width="3%">No</th>
                 <th width="17%">Kode Buku</th>
-                <th width="50%">Judul</th>
+                <th width="45%">Judul</th>
                 <th width="5%">Jumlah DO</th>
                 <th width="10%">Penerbit</th>
                 <th width="5%">Jenjang</th>
                 <th width="5%">Edisi</th>
                 <th width="5%">Stok Pesan</th>
+                <th width="5%">Stok Real</th>
               </tr>
               <?php $no=1; $jumlah =0;
               foreach ($buku as $datapesan) {
@@ -163,8 +181,11 @@
                   <td>'.$datapesan['jenjang'].'</td>
                   <td>'.$datapesan['edisi'].'</td>
                   <td>'.$datapesan['stok_pesan'].'</td>
+                  <td>'.$datapesan['stok_real'].'</td>
                   <input type="hidden" name="kode_buku[]" id="kode_buku[]" value="'.$datapesan['kode_buku'].'">
                   <input type="hidden" name="jumlah[]" id="jumlah[]" value="'.$datapesan['jumlah_beli'].'">
+                  <input type="hidden" name="harga[]" id="harga[]" value="'.$datapesan['harga'].'">
+                  <input type="hidden" name="ket[]" id="ket[]" value="'.$datapesan['ket'].'">
                 </tr>
                 '; $no++; $jumlah = $jumlah+$datapesan['jumlah_beli'];
               }
@@ -172,7 +193,7 @@
               <tr  class="GridViewScrollHeader">
                 <th colspan="3">Jumlah</th>
                 <th><b><?php echo $jumlah; ?></b></th>
-                <th colspan="4"></th>
+                <th colspan="5"></th>
               </tr>
             </table>
             <hr>

@@ -103,8 +103,8 @@
                     <th scope="col">CV Rekanan</th>
                     <th scope="col">Nama Sales</th>
                     <th scope="col">Kaper</th>
-                    <th scope="col">Penerima</th>
-                    <th scope="col">No Telp Penerima</th>
+                    <th scope="col">Nama Pelanggan</th>
+                    <th scope="col">No Telp Penggan</th>
                     <th scope="col">Alamat Kirim</th>
                     <th scope="col">Jum Judul</th>
                     <th scope="col">Jum Buku</th>
@@ -129,9 +129,9 @@
                     <tr class="GridViewScrollItem">
                       <td scope="col"><?php echo $no; ?></td>
                       <td scope="col"><?php echo $pesanan['tanggal']; ?></td>
-                      <td scope="col"><?php echo $pesanan['no_pesanan']; ?></td>
+                      <td scope="col"><?php echo $pesanan['no_do']; ?></td>
                       <td scope="col">
-                        <button name="detail" value="<?php echo $pesanan['no_pesanan']; ?>" type="submit" class="btn btn-info">Detail</button></td>
+                        <button name="approve" value="<?php echo $pesanan['no_do']; ?>" type="submit" class="btn btn-info">Detail</button></td>
                       <td scope="col"><?php echo $pesanan['nama_customer']; ?></td>
                       <td scope="col"><?php echo $pesanan['nama_cv']; ?></td>
                       <td scope="col"><?php echo $pesanan['nama_sales']; ?></td>
@@ -204,7 +204,7 @@
     
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url("Pemasaran/Ambil_data"); ?>",
+        url: "<?php echo base_url("Gudang/Ambil_data"); ?>",
         data: {data : $("#kode_wilayah").val()+"&"+$("#awal").val()+"&"+$("#akhir").val()}, 
         dataType: "json",
         beforeSend: function(e) {
@@ -231,7 +231,7 @@
     
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url("Pemasaran/Ambil_data"); ?>",
+        url: "<?php echo base_url("Gudang/Ambil_data"); ?>",
         data: {data : $("#kode_wilayah").val()+"&"+$("#awal").val()+"&"+$("#akhir").val()}, 
         dataType: "json",
         beforeSend: function(e) {
@@ -258,7 +258,7 @@
     
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url("Pemasaran/Ambil_data"); ?>",
+        url: "<?php echo base_url("Gudang/Ambil_data"); ?>",
         data: {data : $("#kode_wilayah").val()+"&"+$("#awal").val()+"&"+$("#akhir").val()}, 
         dataType: "json",
         beforeSend: function(e) {

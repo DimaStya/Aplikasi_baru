@@ -6,12 +6,8 @@ class M_penerbit extends CI_Model{
 		$data = $this->db->query("SELECT * FROM tbl_penerbit");
 		return $data;
 	}
-	public function Getkode(){
-		$data = $this->db->query("SELECT kode_penerbit FROM tbl_penerbit");
-		return $data->result_array();
-	}
     public function Getkodepenerbit(){
-        $data = $this->db->query("SELECT kode_penerbit FROM tbl_penerbit");
+        $data = $this->db->query("SELECT max(kode_penerbit) FROM tbl_penerbit");
         return $data;
     }
 	public function Insert($table,$data){

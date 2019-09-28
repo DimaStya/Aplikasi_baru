@@ -12,6 +12,13 @@
   <link rel="stylesheet" href="<?php echo base_url('plugins/datatables/dataTables.bootstrap.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('dist/css/AdminLTE.min.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('dist/css/skins/_all-skins.min.css');?>">
+  <script type = "text/javascript" >
+    function preventBack(){
+      window.history.forward();
+    }
+    setTimeout("preventBack()", 0);
+    window.onunload=function(){null};
+  </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

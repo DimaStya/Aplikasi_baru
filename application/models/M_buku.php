@@ -22,9 +22,24 @@ class M_buku extends CI_Model{
         $res = $this->db->insert($table, $data);
         return $res;
     }
+    public function save_batch($table, $data){
+        return $this->db->insert_batch($table, $data);
+    }
     public function Update($table, $data, $where){
         $res = $this->db->update($table, $data, $where);
         return $res;
+    }
+    public function Delete($table, $where){
+        $res = $this->db->delete($table, $where);
+        return $res;
+    }
+    public function Deletbuku($kode_paket, $data_hapus){
+        for ($i = 0; $i < count($data_hapus); $i++){
+            $this->db->where('kode_paket',$kode_paket);
+            $this->db->where($data_hapus[$i]);
+            $data = $this->db->delete('tbl_detpaket');
+    }
+        return $data;
     }
     public function Gettahun(){
         $data = $this->db->query("SHOW TABLES LIKE 'tbl_harga%'");

@@ -379,7 +379,7 @@
             </div>
             <div class="box-body">
               <div class="scrol">
-            <table id="example2" class="table table-bordered table-striped" style="width: 150%;">
+            <table id="example1" class="table table-bordered table-striped" style="width: 150%;">
                 <thead>
                   <tr>
                     <th rowspan="3" style="vertical-align: middle; text-align: center;">No</th>

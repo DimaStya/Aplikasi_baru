@@ -23,6 +23,7 @@
           <div class="box box-primary">
             
               <form role="form" action="<?php echo base_url().'Proses/Add_kerjasama'; ?>" autocomplete="off" method="POST">
+                <input type="hidden" name="kode_kerjasama" id="kode_kerjasama">
                 <div class="box-body">
                   <div class="col-lg-6">                   
                     <label>Pilih Nama Manajer Nasional</label>
@@ -40,10 +41,14 @@
                       <select class="form-control" id ='kode_area' name='kode_area' required="">
                         <option value= "">--Pilih Nama Manajer Area--</option>
                       </select>
+                      
                         <div id="loading" style="margin-top: 15px;">
                           <img src="<?php echo base_url('images/loading.gif');?>" width="18"> <small>Loading...</small>
                         </div>
                     </div>
+                  <div class="col-lg-6">
+                    <label>Nama Manajer Area Sebelumnya</label>
+                    <input type="text" class="form-control col-xs-6" name="nama_area" id="nama_area" readonly=""></div>
                   </div>
                    <div class="box-body">
                     <div class="col-lg-6"> 
@@ -56,92 +61,23 @@
                           <img src="<?php echo base_url('images/loading.gif');?>" width="18"> <small>Loading...</small>
                         </div>
                     </div>
-                  </div>
-                   <div class="box-body">
-                    <div class="col-lg-6"> 
-                      <label>Pilih Nama Customer</label>
-                      <select class="form-control" id ='kode_customer' name='kode_customer' required="">
-                        <option value= "">--Pilih Nama Customer--</option>
-                      </select>
-                      
-                        <div id="loading2" style="margin-top: 15px;">
-                          <img src="<?php echo base_url('images/loading.gif');?>" width="18"> <small>Loading...</small>
-                        </div>
-                    </div>
-                  </div>
-                <div class="box-body">
-                <div class="form-group"> 
-                  <div class="col-xs-6">
-                      <label>Nomor Pengajuan</label>
-                      <input type="text" class="form-control col-xs-6" name="no_pengajuan" id="no_pengajuan"  placeholder="Nomor Pengajuan" required="">
-                  </div>
-                </div>
-              </div>
-                <div class="box-body">
-                <div class="form-group"> 
-                  <div class="col-xs-6">
-                      <label>Nilai Rabat</label>
-                      <input type="text" class="form-control col-xs-6" name="rabat" id="rabat"  placeholder="Nilai Rabat Dalam %" required="" onkeypress="return hanyaAngka(event)">
-                  </div>
-                </div>
-              </div>
-                <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-              </form>
-          </div>
-        </div>
-        <!-- footer modal -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<div id="myModal3" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <!-- konten modal-->
-      <div class="modal-content">
-        <!-- heading modal -->
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Kelola Data Kerjasama</h4>
-        </div>
-        <!-- body modal -->
-        <div class="modal-body">
-          <div class="box box-primary">
-            
-              <form role="form" action="<?php echo base_url().'Proses/Add_kerjasama'; ?>" autocomplete="off" method="POST">
-                <input type="hidden" name="no_pengajuanhidden" id="no_pengajuanhidden">
-                  <div class="box-body">
-                  <div class="col-lg-6">
-                    <label>Nama Manajer Area Sebelumnya</label>
-                    <input type="text" class="form-control col-xs-6" name="nama_area" id="nama_area" readonly=""></div>
-                  </div>
-                   <div class="box-body">
                   <div class="col-lg-6">
                     <label>Alamat Perwakilan Sebelumnya</label>
                     <input type="text" class="form-control col-xs-6" name="alamat_perwakilan" id="alamat_perwakilan" readonly=""></div>
                   </div>
-                   <div class="box-body">
-                  <div class="col-lg-6">
-                    <label>Nama Customer Sebelumnya</label>
-                    <input type="text" class="form-control col-xs-6" name="nama_customer" id="nama_customer" readonly=""></div>
-                  </div>
                 <div class="box-body">
                 <div class="form-group"> 
                   <div class="col-xs-6">
-                      <label>Nomor Pengajuan</label>
-                      <input type="text" class="form-control col-xs-6" name="no_pengajuanedit" id="no_pengajuanedit"  placeholder="Nomor Pengajuan" required="">
+                      <label>Nama Kerjasama</label>
+                      <input type="text" class="form-control col-xs-6" name="nama_kerjasama" id="nama_kerjasama"  placeholder="Nama Kerjasama" required="">
                   </div>
                 </div>
               </div>
-                <div class="box-body">
+               <div class="box-body">
                 <div class="form-group"> 
                   <div class="col-xs-6">
-                      <label>Nilai Rabat</label>
-                      <input type="text" class="form-control col-xs-6" name="rabatedit" id="rabatedit"  placeholder="Nilai Rabat Dalam %" required="" onkeypress="return hanyaAngka(event)">
+                      <label>Alamat Kerjasama</label>
+                      <textarea style="resize:none;width:250px;height:100px;" class="form-control col-xs-6" name="alamat_kerjasama" id="alamat_kerjasama"  placeholder="Alamat Kerjasama" required=""></textarea>
                   </div>
                 </div>
               </div>
@@ -158,69 +94,10 @@
       </div>
     </div>
   </div>
-
-  <div id="myModal1" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <!-- konten modal-->
-      <div class="modal-content">
-        <!-- heading modal -->
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Kelola Data Kerjasama Pengganti</h4>
-        </div>
-        <!-- body modal -->
-        <div class="modal-body">
-          <div class="box box-primary">
-            
-              <form role="form" action="<?php echo base_url().'Proses/Add_kerjasama'; ?>" autocomplete="off" method="POST">
-                <input type="hidden" name="no_pengajuanold" id="no_pengajuanold">
-                <input type="hidden" name="kode_customerold" id="kode_customerold">
-                  <div class="box-body">
-                    <div class="col-lg-6">
-                      <label>Perwakilan</label>
-                      <input type="text" class="form-control col-xs-6" name="alamat_perwakilanold" id="alamat_perwakilanold" readonly="">
-                    </div>
-                  </div>
-                  <div class="box-body">
-                    <div class="col-lg-6">
-                      <label>Nama Customer</label>
-                      <input type="text" class="form-control col-xs-6" name="nama_customerold" id="nama_customerold" readonly="">
-                    </div>
-                  </div>
-                <div class="box-body">
-                <div class="form-group"> 
-                  <div class="col-xs-6">
-                      <label>Nomor Pengajuan Baru</label>
-                      <input type="text" class="form-control col-xs-6" name="no_pengajuannew" id="no_pengajuannew"  placeholder="Nomor Pengajuan" required="">
-                  </div>
-                </div>
-              </div>
-                <div class="box-body">
-                <div class="form-group"> 
-                  <div class="col-xs-6">
-                      <label>Nilai Rabat</label>
-                      <input type="text" class="form-control col-xs-6" name="rabatnew" id="rabatnew"  placeholder="Nilai Rabat Dalam %" required="" onkeypress="return hanyaAngka(event)">
-                  </div>
-                </div>
-              </div>
-                <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-              </form>
-          </div>
-        </div>
-        <!-- footer modal -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
     <section class="content">
       <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Data Kerjasama</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','','','','','','','','','')">+</button>
+              <h3 class="box-title">Data Kerjasama</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','','','','','')">+</button>
       
             </div>
             <div class="box-body">
@@ -229,24 +106,22 @@
 
                 <tr>
                   <th>No</th>
-                  <th>Nomor Pengajuan</th>
+                  <th>Nama Kerjasama</th>
                   <th>Perwakilan</th>
-                  <th>Nama Cutomer</th>
-                  <th>Rabat</th>
+                  <th>Alamat</th>
                   <th>Status</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                  <?php $no=1; foreach ($data1 as $kerjasama) { ?>
+                  <?php $no=1; foreach ($data1 as $cv) { ?>
                   <tr>
                     <td><?php echo $no;?></td>
-                     <td><?php echo $kerjasama['no_pengajuan'];?></td>
-                     <td><?php echo $kerjasama['alamat_perwakilan'];?></td>
-                     <td><?php echo $kerjasama['nama_customer'];?></td>
-                     <td><?php echo $kerjasama['rabat'];?> %</td>
-                    <td><?php echo $kerjasama['aktif'];?></td>
-                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal3' onclick="SetInput('','','','<?php echo $kerjasama['kode_nasional'];?>','<?php echo $kerjasama['no_pengajuan'];?>','<?php echo $kerjasama['nama_area'];?>','<?php echo $kerjasama['alamat_perwakilan'];?>','<?php echo $kerjasama['nama_customer'];?>','<?php echo $kerjasama['rabat'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button type='button' class='btn-danger'><i class='fa fa-fw fa-repeat' data-toggle='modal' data-target='#myModal1' onclick="SetInput('','','<?php echo $kerjasama['kode_customer'];?>','','<?php echo $kerjasama['no_pengajuan'];?>','','<?php echo $kerjasama['alamat_perwakilan'];?>','<?php echo $kerjasama['nama_customer'];?>','')"></i></button></td></td>
+                     <td><?php echo $cv['nama_kerjasama'];?></td>
+                    <td><?php echo $cv['alamat_perwakilan'];?></td>
+                    <td><?php echo $cv['alamat_kerjasama'];?></td>
+                    <td><?php echo $cv['aktif'];?></td>
+                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('','','<?php echo $cv['kode_kerjasama'];?>','<?php echo $cv['kode_nasional'];?>','<?php echo $cv['nama_area'];?>','<?php echo $cv['alamat_perwakilan'];?>','<?php echo $cv['nama_kerjasama'];?>','<?php echo $cv['alamat_kerjasama'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td></td>
                   </tr>
                   <?php $no++;} ?>
                 </tbody>
@@ -256,6 +131,21 @@
         </div>
     </section>
 </div>
+<script type="text/javascript">
+  <?php $no=1; foreach ($data1 as $kerjasama) { 
+    echo "
+      function Klik".$no."(){
+        var r = confirm('Yakin Data Non Aktifkan?');
+        if(r == true){
+          window.location = '".base_url()."Proses/Hapus_kerjasama/".$kerjasama['kode_kerjasama']."';
+        }
+        
+      }
+    ";
+
+    $no++;}
+  ?>
+</script>
 
 <!-- Load librari/plugin jquery nya -->
   <script src="<?php echo base_url("js/jquery.min.js"); ?>" type="text/javascript"></script>
@@ -265,7 +155,6 @@
     // Kita sembunyikan dulu untuk loadingnya
     $("#loading").hide();
     $("#loading1").hide();
-    $("#loading2").hide();
     
     $("#kode_nasional").change(function(){ // Ketika user mengganti atau memilih data provinsi
       $("#kode_area").hide(); // Sembunyikan dulu combobox kota nya
@@ -314,33 +203,6 @@
           // set isi dari combobox kota
           // lalu munculkan kembali combobox kotanya
           $("#kode_perwakilan").html(response.perwakilan).show();
-        },
-        error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
-        }
-      });
-    });
-
-    $("#kode_perwakilan").change(function(){ // Ketika user mengganti atau memilih data provinsi
-      $("#kode_customer").hide(); // Sembunyikan dulu combobox kota nya
-      $("#loading2").show(); // Tampilkan loadingnya
-    
-      $.ajax({
-        type: "POST", // Method pengiriman data bisa dengan GET atau POST
-        url: "<?php echo base_url("Form/Customerpengajuan"); ?>", // Isi dengan url/path file php yang dituju
-        data: {kode_perwakilan : $("#kode_perwakilan").val()}, // data yang akan dikirim ke file yang dituju
-        dataType: "json",
-        beforeSend: function(e) {
-          if(e && e.overrideMimeType) {
-            e.overrideMimeType("application/json;charset=UTF-8");
-          }
-        },
-        success: function(response){ // Ketika proses pengiriman berhasil
-          $("#loading2").hide(); // Sembunyikan loadingnya
-
-          // set isi dari combobox kota
-          // lalu munculkan kembali combobox kotanya
-          $("#kode_customer").html(response.customer).show();
         },
         error: function (xhr, ajaxOptions, thrownError) { // Ketika ada error
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error

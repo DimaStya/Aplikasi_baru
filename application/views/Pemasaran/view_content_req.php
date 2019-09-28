@@ -91,14 +91,10 @@
                     <th scope="col">Tanggal</th>
                     <th scope="col">No Pesanan</th>
                     <th scope="col">Aksi</th>
-                    <th scope="col">Customer</th>
+                    <th scope="col">Alasan</th>
+                    <th scope="col">Nama Customer</th>
                     <th scope="col">CV Rekanan</th>
-                    <th scope="col">Nama Sales</th>
-                    <th scope="col">Kaper</th>
-                    <th scope="col">Penerima</th>
-                    <th scope="col">Jenjang</th>
-                    <th scope="col">Jum Judul</th>
-                    <th scope="col">Jum Buku</th>
+                    <th scope="col">Kerjasama</th>
                   </tr>
                   <tbody id="data">
                     <tr class="GridViewScrollItem">
@@ -110,25 +106,18 @@
                     <td scope="col"></td>
                     <td scope="col"></td>
                     <td scope="col"></td>
-                    <td scope="col"></td>
-                    <td scope="col"></td>
-                    <td scope="col"></td>
-                    <td scope="col"></td>
                   </tr>
                   <?php $no=1; foreach ($pesanan as $pesanan) {?>
+
                     <tr class="GridViewScrollItem">
                       <td scope="col"><?php echo $no; ?></td>
                       <td scope="col"><?php echo $pesanan['tanggal']; ?></td>
                       <td scope="col"><?php echo $pesanan['no_pesanan']; ?></td>
                       <td scope="col"><button name="no_pesanan" id="no_pesanan" value="<?php echo $pesanan['no_pesanan']; ?>" type="submit" class="btn btn-danger">Hapus Pesanan</button></td>
+                      <td scope="col" width="380" style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"><?php echo $pesanan['alasan']; ?></td>
                       <td scope="col"><?php echo $pesanan['nama_customer']; ?></td>
                       <td scope="col"><?php echo $pesanan['nama_cv']; ?></td>
-                      <td scope="col"><?php echo $pesanan['nama_sales']; ?></td>
-                      <td scope="col"><?php echo $pesanan['nama_kaper']; ?></td>
-                      <td scope="col"><?php echo $pesanan['nama_penerima']; ?></td>
-                      <td scope="col"><?php echo $pesanan['jenjang']; ?></td>
-                      <td scope="col"><?php echo $pesanan['jumlah_judul']; ?></td>
-                      <td scope="col"><?php echo $pesanan['jumlah_buku']; ?></td>
+                      <td scope="col"><?php echo $pesanan['nama_kerjasama']; ?></td>
                   </tr>
                   <?php $no++; }?>
                   </tbody>

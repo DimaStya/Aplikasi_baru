@@ -83,7 +83,10 @@
                     <td><?php echo $paket['kode_paket'];?></td>
                     <td><?php echo $paket['nama_paket'];?></td>
                     <td><?php echo $paket['jumlah'];?></td>
-                    <td><a href="<?php echo base_url('Admin/Detpaket/'.$paket['kode_paket']);?>"><button type='button' class='btn-success'><i class='fa fa-fw fa-database'></i></button></a>|<button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('<?php echo $paket['kode_paket'];?>','<?php echo $paket['nama_paket'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td>
+                    <td><a href="<?php echo base_url('Admin/Detpaket/'.$paket['kode_paket']);?>">
+                      <button title="Data" type='button' class='btn-success'><i class='fa fa-fw fa-database'></i></button></a>|
+                      <button title="Ubah" type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('<?php echo $paket['kode_paket'];?>','<?php echo $paket['nama_paket'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|
+                      <button title="Hapus" onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td>
                   </tr>
                   <?php $no++;} ?>
                 </tbody>

@@ -69,28 +69,35 @@
                  <td width="25%">: <?php echo $pesanan['nama_kaper']; ?></td>
                </tr> 
                <tr>
-                 <th width="15%">Rabat</th>
-                 <td width="25%">: <?php echo $pesanan['rabat']; ?> %</td>
+                 <th width="15%">Kerjasama</th>
+                 <td width="25%">: <?php echo $pesanan['nama_kerjasama']; ?></td>
                  <td width="20%"></td>
                  <th width="15%">Tipe Buku</th>
                  <td width="25%">: <?php echo $pesanan['tipe_buku']; ?></td>
                </tr>
                <tr>
-                 <th width="15%"></th>
-                 <td width="25%"></td>
+                 <th width="15%">No Pengajuan</th>
+                 <td width="25%">: <?php echo $pesanan['no_pengajuan']; ?></td>
                  <td width="20%"></td>
-                 <th width="15%">Jenis Pemabayaran</th>
+                 <th width="15%">Jenis Pembayaran</th>
                  <td width="25%">: <?php echo $pesanan['jenis_pembayaran']; ?></td>
                </tr>  
                <tr>
-                 <th width="15%">Nama Penerima</th>
-                 <td width="25%">: <?php echo $pesanan['nama_penerima']; ?></td>
+                 <th width="15%"></th>
+                 <td width="25%"></td>
                  <td width="20%"></td>
                  <th width="15%">Sumber Dana</th>
                  <td width="25%">: <?php echo $pesanan['sumber_dana']; ?></td>
-               </tr> 
+               </tr>
                <tr>
-                 <th width="15%">No Telp Penerima</th>
+                 <th width="15%">Nama Pelanggan</th>
+                 <td width="25%">: <?php echo $pesanan['nama_penerima']; ?></td>
+                 <td width="20%"></td>
+                 <th width="15%"></th>
+                 <td width="25%"></td>
+               </tr>
+               <tr>
+                 <th width="15%">No Telp Pelanggan</th>
                  <td width="25%">: <?php echo $pesanan['no_telp_penerima']; ?></td>
                  <td width="20%"></td>
                  <th width="15%"></th>
@@ -101,7 +108,16 @@
                  <td colspan="2" width="25%">: <?php echo $pesanan['alamat_penerima']; ?></td>
                  <th width="15%"></th>
                  <td width="25%"></td>
-               </tr> 
+               </tr>
+               <tr>
+                 <td colspan="5"> &nbsp; </td>
+               </tr>
+               <tr>
+                 <th width="15%">Keterangan</th>
+                 <td colspan="2" width="25%">: <?php echo $pesanan['keterangan'].' // '.$pesanan['stok']; ?></td>
+                 <th width="15%"></th>
+                 <td width="25%"></td>
+               </tr>
             </table>
             <br>
             <hr>
@@ -141,8 +157,11 @@
               </tr>
             </table>
             <hr>
-            <?php if ($button == 'ada'){ ?>
-            <button type="submit" class="btn btn-primary">Approve DO</button>
+            <?php if ($button == 'approve'){ ?>
+            <button type="submit" name="klik" id="klik" value="approve" class="btn btn-primary">Approve DO</button>
+            <button type="submit" name="klik" id="klik" value="sj" class="btn btn-success">Approve DO & Proses SJ</button>
+          <?php }else if ($button == 'Proses SJ') { ?>
+            <button type="submit" name="klik" id="klik" value="sj" class="btn btn-success">Buat SJ Baru</button>
           <?php }?>
             </form>
             <hr>

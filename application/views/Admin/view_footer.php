@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Presensi Marketing <a href="http://Mediatamasolo.com">Mediatamasolo</a>.</strong>
+    <strong>New Sistem Marketing <a href="http://Mediatamasolo.com">Mediatamasolo</a>.</strong>
   </footer>
   <div class="control-sidebar-bg"></div>
 </div>

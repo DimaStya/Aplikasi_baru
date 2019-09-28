@@ -73,10 +73,18 @@
                   </div>
                 </div>
               </div>
+                <div class="box-body">
+                <div class="form-group"> 
+                  <div class="col-xs-6">
+                      <label>No Telp</label>
+                      <input type="text" class="form-control col-xs-6" name="no_telp" id="no_telp"  placeholder="No Telp Customer" required="" onkeypress="return hanyaAngka(event)">
+                  </div>
+                </div>
+              </div>
               <div class="box-body">
                 <div class="form-group"> 
                   <div class="col-xs-6">
-                      <label>Alamat scustomer</label>
+                      <label>Alamat customer</label>
                       <textarea style="resize:none;width:250px;height:100px;" class="form-control col-xs-6" name="alamat_customer" id="alamat_customer"  placeholder="Alamat Customer" required=""></textarea>
                   </div>
                 </div>
@@ -97,7 +105,7 @@
     <section class="content">
       <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Data Customer</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','','','','','')">+</button>
+              <h3 class="box-title">Data Customer</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','',','','','','','','')">+</button>
       
             </div>
             <div class="box-body">
@@ -107,6 +115,7 @@
                 <tr>
                   <th>No</th>
                   <th>Nama customer</th>
+                  <th>No Telp</th>
                   <th>Perwakilan</th>
                   <th>Alamat</th>
                   <th>Status</th>
@@ -118,10 +127,11 @@
                   <tr>
                     <td><?php echo $no;?></td>
                      <td><?php echo $customer['nama_customer'];?></td>
+                     <td><?php echo $customer['no_telp'];?></td>
                     <td><?php echo $customer['alamat_perwakilan'];?></td>
                     <td><?php echo $customer['alamat_customer'];?></td>
                     <td><?php echo $customer['aktif'];?></td>
-                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('','','<?php echo $customer['kode_customer'];?>','<?php echo $customer['kode_nasional'];?>','<?php echo $customer['nama_area'];?>','<?php echo $customer['alamat_perwakilan'];?>','<?php echo $customer['alamat_customer'];?>','<?php echo $customer['nama_customer'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td></td>
+                    <td width="10%"><button type='button' class='btn-info' data-toggle='modal' data-target='#myModal' onclick="SetInput('','','<?php echo $customer['kode_customer'];?>','<?php echo $customer['kode_nasional'];?>','<?php echo $customer['nama_area'];?>','<?php echo $customer['alamat_perwakilan'];?>','<?php echo $customer['nama_customer'];?>','<?php echo $customer['no_telp'];?>','<?php echo $customer['alamat_customer'];?>')"><i class='fa fa-fw fa-pencil-square-o'></i></button>|<button onclick='Klik<?php echo $no;?>()' type='button' class='btn-danger'><i class='fa fa-fw fa-sign-out'></i></button></td></td>
                   </tr>
                   <?php $no++;} ?>
                 </tbody>

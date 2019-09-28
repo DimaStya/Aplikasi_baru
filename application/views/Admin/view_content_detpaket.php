@@ -42,10 +42,10 @@
                     <td><?php echo $buku['kode_buku'];?></td>
                     <td><?php echo $buku['judul'];?></td>
                     <td>
-                      <input type="hidden" name="kode_buku[]" id="kode_buku[]" value="<?php echo $buku['kode_buku'];?>">
-                      <input type="checkbox" name="hapus[]" id="hapus[]" class="flat-red"></td>
+                      <input type="checkbox" name="hapus[]" id="hapus[]" value="<?php echo $buku['kode_buku'];?>" class="flat-red"></td>
                   </tr>
                   <?php $no++;} ?>
+                  <input type="hidden" name="kode_paket" id="kode_paket" value="<?php echo $kode_paket;?>">
                 </tbody>
               </table>
               <button  type='submit' class='pull-right btn-danger' name="kurang" id="kurang" value="<?php echo $kode_paket;?>"><i class='fa fa-fw fa-database'>-</i>Kurangi Buku</button>

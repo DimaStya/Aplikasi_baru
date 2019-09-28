@@ -42,9 +42,11 @@
             <?php if($menu=='8'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Gudang';?>"><i class="fa fa-circle-o"></i> Admin Gudang</a></li>
             <?php if($menu=='9'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Produksi';?>"><i class="fa fa-circle-o"></i> Admin Produksi</a></li>
             <?php if($menu=='10'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Customer';?>"><i class="fa fa-circle-o"></i> Data Customer</a></li>
-            <?php if($menu=='11'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Rekanan';?>"><i class="fa fa-circle-o"></i> Data CV Rekanan</a></li>
-            <?php if($menu=='12'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Mou';?>"><i class="fa fa-circle-o"></i> MoU CV</a></li>
-            <?php if($menu=='13'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Penerbit';?>"><i class="fa fa-circle-o"></i> Data Penerbit</a></li>
+            <?php if($menu=='11'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Kerjasama';?>"><i class="fa fa-circle-o"></i> Data Kerjasama</a></li>
+            <?php if($menu=='12'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Pengajuan';?>"><i class="fa fa-circle-o"></i> Data Pengajuan</a></li>
+            <?php if($menu=='13'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Rekanan';?>"><i class="fa fa-circle-o"></i> Data CV Rekanan</a></li>
+            <?php if($menu=='14'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Mou';?>"><i class="fa fa-circle-o"></i> MoU CV</a></li>
+            <?php if($menu=='15'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Penerbit';?>"><i class="fa fa-circle-o"></i> Data Penerbit</a></li>
 
           </ul>
         </li>
