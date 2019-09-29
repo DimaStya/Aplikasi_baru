@@ -127,9 +127,9 @@ Class Produksi extends CI_Controller{
                     <td scope='col'>".$data->tanggal."</td>
                     <td scope='col'>".$data->kode_oc."</td>
                     <td scope='col'>".$data->nama_produksi."</td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' class='btn btn-success' data-toggle='modal' value='".$data->kode_oc."' data-target='#myModal'>Update</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' class='btn btn-success' data-toggle='modal' value='".$data->kode_oc."' data-target='#myModal'>Update</button></td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loading_buk').show();
       $('#buku_oc').hide();
 

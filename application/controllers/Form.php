@@ -416,13 +416,13 @@ class Form extends CI_Controller {
         	<td>'.$data->kode_buku.'</td>
         	<td>'.$data->judul.'</td>
         	<td>
-        	<button type="button" class="btn-success" name="add'.$no.'" id="add'.$no.'" data-dismiss="modal">Add</button>
+        	<button type="button" class="btn-success" name="pencet'.$no.'" id="pencet'.$no.'" data-dismiss="modal">Add</button>
         	<input type="hidden" name="kode_buku'.$no.'" id="kode_buku'.$no.'" value="'.$data->kode_buku.'">
         	<input type="hidden" name="judul'.$no.'" id="judul'.$no.'" value="'.$data->judul.'">
         	</td>
         	</tr>
 <script>
-$("#add'.$no.'").click(function(){            
+$("#pencet'.$no.'").click(function(){            
             var markup = "<tr><td>'.$data->kode_buku.'</td><td>'.$data->judul.'</td><td><input  class='.$class.' type='.$text.' name='.$kodebuku.' id='.$kodebuku.' value='.$kode_buku.' required><input  class='.$class.' type='.$number.' min='.$min.' name='.$jumlah.' id='.$jumlah.' required></td><td><input type='.$checkbox.' name='.$record.'></td></tr>";
             $("#data").append(markup);
         });

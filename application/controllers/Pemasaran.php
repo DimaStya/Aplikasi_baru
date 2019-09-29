@@ -492,7 +492,7 @@ Class Pemasaran extends CI_Controller{
                     <td scope='col'>".$data->tanggal."</td>
                     <td scope='col'>".$data->no_do."</td>
                     <td scope='col'><button name='no_pesanan' id='no_pesanan' value='".$data->no_do."' type='submit' class='btn btn-primary'>Downlaod PDF</button></td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->no_do."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->no_do."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
                     <td scope='col'>".$data->nama_customer."</td>
                     <td scope='col'>".$data->nama_cv."</td>
                     <td scope='col'>".$data->nama_sales."</td>
@@ -502,7 +502,7 @@ Class Pemasaran extends CI_Controller{
                     <td scope='col'>".$data->jumlah_judul."</td>
                     <td scope='col'>".$data->jumlah_buku."</td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $.ajax({
         type: 'POST',
@@ -561,7 +561,7 @@ $('#klik".$no."').click(function(){
                     <td scope='col'>".$data->tanggal."</td>
                     <td scope='col'>".$data->no_do."</td>
                     <td scope='col'><button name='no_pesanan' id='no_pesanan' value='".$data->no_do."' type='submit' class='btn btn-primary'>Downlaod PDF</button></td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->no_do."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->no_do."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
                     <td scope='col'>".$data->nama_customer."</td>
                     <td scope='col'>".$data->nama_cv."</td>
                     <td scope='col'>".$data->nama_sales."</td>
@@ -571,7 +571,7 @@ $('#klik".$no."').click(function(){
                     <td scope='col'>".$data->jumlah_judul."</td>
                     <td scope='col'>".$data->jumlah_buku."</td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $.ajax({
         type: 'POST',
@@ -621,9 +621,9 @@ $('#klik".$no."').click(function(){
                     <td scope='col'>".$data->no_do."</td>
                     <td scope='col'>".$data->no_suratretur."</td>
                     <td scope='col' width='380' style='white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word'>".$data->alasan."</td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->no_suratretur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->no_suratretur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $.ajax({
         type: 'POST',
@@ -675,9 +675,9 @@ $('#klik".$no."').click(function(){
                     <td scope='col'>".$data->no_do."</td>
                     <td scope='col'>".$data->no_suratretur."</td>
                     <td scope='col' width='380' style='white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word'>".$data->alasan."</td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->no_suratretur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->no_suratretur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $.ajax({
         type: 'POST',

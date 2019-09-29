@@ -562,9 +562,9 @@ Class Perwakilan extends CI_Controller{
                     <td scope='col'>".$data->alamat_kirim."</td>
                     <td scope='col'>".$data->keterangan."</td>
                     <td scope='col'>".$data->sj."</td>
-                    <td scope='col'><button type='button' class='btn-info' data-toggle='modal' name='klik".$no."' id='klik".$no."' data-target='#myModal'>Detail</button></td>
+                    <td scope='col'><button type='button' class='btn-info' data-toggle='modal' name='pencet".$no."' id='pencet".$no."' data-target='#myModal'>Detail</button></td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $('#stokmini').hide();
       $.ajax({

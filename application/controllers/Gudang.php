@@ -586,7 +586,7 @@ Class Gudang extends CI_Controller{
                     	<button type='submit' name='klik' id='klik' value='sj' class='btn btn-success'>SJ Baru</button>
                     </form>	
                     </td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->no_do."' class='btn btn-warning' data-toggle='modal' data-target='#myModal'>Cek SJ</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->no_do."' class='btn btn-warning' data-toggle='modal' data-target='#myModal'>Cek SJ</button></td>
                     <td scope='col'>".$data->nama_customer."</td>
                     <td scope='col'>".$data->nama_cv."</td>
                     <td scope='col'>".$data->nama_sales."</td>
@@ -597,7 +597,7 @@ Class Gudang extends CI_Controller{
                     <td scope='col'>".$data->jumlah_kirim."</td>
                     <td scope='col'>".$data->sisa_kirim."</td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $.ajax({
         type: 'POST',
@@ -699,9 +699,9 @@ $('#klik".$no."').click(function(){
         $no=1;
         foreach ($retur->result() as $data) {
         	if($data->nota_retur == 'Belum Nota Retur' && $data->nota_retur == 'Admin Telah Menerima'){
-        		$button = "<button onclick='Klik".$no."()' type='button' class='btn btn-danger'>Hapus</button>
+        		$button = "<button onclick='pencet".$no."()' type='button' class='btn btn-danger'>Hapus</button>
 <script type='text/javascript'>
-      function Klik".$no."(){
+      function pencet".$no."(){
         var r = confirm('Yakin Data dihapus?');
         if(r == true){
           window.location = '".base_url().'Gudang/Hapus_ttr/'.md5($data->kode_retur)."';
@@ -763,7 +763,7 @@ $('#klik".$no."').click(function(){
         			<td scope='col'>".$no."</td>
                     <td scope='col'>".$data->tanggal."</td>
                     <td scope='col'>".$data->no_do."</td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->no_do."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->no_do."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
                     <td scope='col'>".$data->nama_customer."</td>
                     <td scope='col'>".$data->nama_cv."</td>
                     <td scope='col'>".$data->nama_sales."</td>
@@ -774,7 +774,7 @@ $('#klik".$no."').click(function(){
                     <td scope='col'>".$data->jumlah_kirim."</td>
                     <td scope='col'>".$data->sisa_kirim."</td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $.ajax({
         type: 'POST',
@@ -993,10 +993,10 @@ $('#klik".$no."').click(function(){
         			<td scope='col'>".$no."</td>
                     <td scope='col'>".$data->tanggal."</td>
                     <td scope='col'>".$data->kode_lpb."</td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' class='btn btn-success' data-toggle='modal' data-target = '#myModal'> Update </button>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' class='btn btn-success' data-toggle='modal' data-target = '#myModal'> Update </button>
                     </td></tr>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loading_buk').show();
       $('#buku_lpb').hide();
       $.ajax({
@@ -1256,9 +1256,9 @@ $('#klik".$no."').click(function(){
                     <td scope='col'>".$data->no_do."</td>
                     <td scope='col'>".$data->no_suratretur."</td>
                     <td scope='col' width='380' style='white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word'>".$data->alasan."</td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->no_suratretur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->no_suratretur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Detail</button></td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $.ajax({
         type: 'POST',

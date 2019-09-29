@@ -495,9 +495,9 @@ Class Keuangan extends CI_Controller{
                     <td scope='col'>".$data->no_faktur."</td>
                     <td scope='col'>".$data->kode_retur."</td>
                     <td scope='col'>".$data->alasan."</td>
-                    <td scope='col'><button type='button' name='klik".$no."' id='klik".$no."' value='".$data->kode_retur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Cek SJ</button></td>
+                    <td scope='col'><button type='button' name='pencet".$no."' id='pencet".$no."' value='".$data->kode_retur."' class='btn btn-info' data-toggle='modal' data-target='#myModal'>Cek SJ</button></td>
 <script>
-$('#klik".$no."').click(function(){ 
+$('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
       $('#ttr').hide();
       $.ajax({
@@ -548,9 +548,9 @@ $('#klik".$no."').click(function(){
         $no=1;
         foreach ($pesanan->result() as $data) {
         	if ($data->keterangan == 'Admin Telah Menerima') {
-        		$hapus = "<button type='button' class='btn btn-danger' onclick='Klik".$no."()'>Hapus</button>
+        		$hapus = "<button type='button' class='btn btn-danger' onclick='pencet".$no."()'>Hapus</button>
                         <script type='text/javascript'>
-                            function Klik".$no."(){
+                            function pencet".$no."(){
                               var r = confirm('Yakin Nota Dihapus?');
                               if(r == true){
                                 window.location = '".base_url()."Keuangan/Hapus_nota/?dari=hapus&&no_notaretur=".$data->no_notaretur."';
