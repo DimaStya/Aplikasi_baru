@@ -6,7 +6,7 @@
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username'); ?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i>Admin Gudang</a>
+          <a href="#"><i class="fa fa-circle text-success"></i><?php echo$this->session->userdata('siapa'); ?></a>
         </div>
       </div>
       <ul class="sidebar-menu">
@@ -89,6 +89,26 @@
           <ul class="treeview-menu">
             <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Lpb_baru';?>"><i class="fa fa-circle-o"></i> LPB Baru</a></li>
             <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Daftar_lpb';?>"><i class="fa fa-circle-o"></i>Daftar LPB</a></li>
+          </ul>
+        </li>
+        <?php
+        if($angka=='6'){
+          echo '<li class="treeview active">';
+        }else{
+          echo '<li class="treeview">';
+        }
+        ?>
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Report</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Report_stok';?>"><i class="fa fa-circle-o"></i>Report Stok Buku</a></li>
+            <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Report_oc';?>"><i class="fa fa-circle-o"></i>Report OC</a></li>
+            <?php if($menu=='3'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Report_lpb';?>"><i class="fa fa-circle-o"></i>Report LPB</a></li>
+            <?php if($menu=='4'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Report_pesanan';?>"><i class="fa fa-circle-o"></i>Report Pesanan</a></li>
+            <?php if($menu=='5'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Gudang/Report_sjttr';?>"><i class="fa fa-circle-o"></i>Report SJ-TTRs</a></li>
           </ul>
         </li>
       </ul>

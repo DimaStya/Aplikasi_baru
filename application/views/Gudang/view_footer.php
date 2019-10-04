@@ -1,3 +1,4 @@
+<div id="notifications"><?php echo $this->session->flashdata('pesan'); ?></div> 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
@@ -14,6 +15,10 @@
 <script src="<?php echo base_url('plugins/fastclick/fastclick.js');?>"></script>
 <script src="<?php echo base_url('dist/js/app.min.js');?>"></script>
 <script src="<?php echo base_url('dist/js/demo.js');?>"></script>
+
+<script>   
+    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+</script>
 
 
 

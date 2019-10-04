@@ -126,7 +126,11 @@ class Import extends CI_Controller {
 				$this->M_import->insert_multiple_harga('tbl_harga_'.$tahun_sek,$data_harga);
 			}
 		
-		
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di import!!.</p>
+				                </div>');
 		redirect(base_url().'Admin/Buku'); // Redirect ke halaman awal (ke controller siswa fungsi index)
 	}
 }

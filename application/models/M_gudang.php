@@ -210,7 +210,7 @@ class M_gudang extends CI_Model{
         return $data;
     }
     public function Alamat($no_pesanan){
-        $data = $this->db->query("SELECT tbl_pesanan.no_pesanan, tbl_customer.nama_customer, tbl_customer.alamat_customer, tbl_customer.no_telp as telp_cust, tbl_cvrekanan.kode_cv, tbl_cvrekanan.nama_cv, tbl_cvrekanan.alamat_cv, tbl_cvrekanan.no_telp as telp_cv,tbl_pesanan.stok
+        $data = $this->db->query("SELECT tbl_pesanan.no_pesanan, tbl_customer.nama_customer, tbl_customer.alamat_customer, tbl_customer.no_telp as telp_cust, tbl_cvrekanan.kode_cv, tbl_cvrekanan.nama_cv, tbl_cvrekanan.alamat_cv, tbl_cvrekanan.no_telp as telp_cv, tbl_pesanan.stok
             FROM tbl_pesanan, tbl_mou, tbl_kerjasama, tbl_customer, tbl_cvrekanan 
             WHERE tbl_pesanan.no_pesanan = '$no_pesanan'
             AND tbl_pesanan.kode_customer = tbl_customer.kode_customer

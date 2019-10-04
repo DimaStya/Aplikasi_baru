@@ -1,15 +1,5 @@
 <style type="text/css">
-  #notifications {
-    cursor: pointer;
-    position: fixed;
-    right: 0px;
-    z-index: 9999;
-    top: 110px;
-    margin-bottom: 22px;
-    margin-right: 15px;
-    min-width: 300px; 
-    max-width: 800px;
-  }
+  
   .GridViewScrollHeader TH, .GridViewScrollHeader TD {
     padding: 10px;
     font-weight: normal;
@@ -119,7 +109,6 @@
       <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Add Buku</h3>&nbsp;<button type="button" name="klik1" id="klik1" class="btn-info" data-toggle="modal" data-target="#myModal">+</button>
-              <div id="notifications"><?php echo $this->session->flashdata('pesan'); ?></div> 
             </div>
             <div class="box-body">
             <form method="POST" action="<?php echo base_url().'Gudang/Add_lpb/';?>">
@@ -151,9 +140,7 @@
 <script src="<?php echo base_url("js/jquery-1.7.1.min.js"); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url("js/gridviewscroll.js"); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url("js/jquery.min.js"); ?>" type="text/javascript"></script>
-<script>   
-    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
-</script>
+
 <script>
   $(function () {
     //Date picker

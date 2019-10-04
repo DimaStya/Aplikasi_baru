@@ -6,7 +6,7 @@
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username'); ?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i>Admin Keuangan</a>
+          <a href="#"><i class="fa fa-circle text-success"></i><?php echo$this->session->userdata('siapa'); ?></a>
         </div>
       </div>
       <ul class="sidebar-menu">
@@ -62,7 +62,22 @@
             <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Keuangan/Ttr';?>"><i class="fa fa-circle-o"></i> TTR</a></li>
             <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Keuangan/Nota_retur';?>"><i class="fa fa-circle-o"></i>TerNota</a></li>
             <?php if($menu=='3'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Keuangan/Req_update';?>"><i class="fa fa-circle-o"></i>Req Update</a></li>
-            </li>
+          </ul>
+        </li>
+         <?php
+        if($angka=='5'){
+          echo '<li class="treeview active">';
+        }else{
+          echo '<li class="treeview">';
+        }
+        ?>
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Report</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Keuangan/Report_fakturnr';?>"><i class="fa fa-circle-o"></i>Report Faktur-NR</a></li>
           </ul>
         </li>
       </ul>

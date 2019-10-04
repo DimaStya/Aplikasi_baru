@@ -413,6 +413,7 @@ Class Perwakilan extends CI_Controller{
 			$data2 = array('datbuk' => $datbuk->result_array(), 'no_pesanan' => $no_pesanan);
 			$this->load->view('Perwakilan/view_content_tamjud', $data2);
 		}else{
+
 			redirect(base_url().'Perwakilan');
 		}
 		$this->load->view('Perwakilan/view_footer');
@@ -650,6 +651,11 @@ $('#pencet".$no."').click(function(){
 				$up = $this->m_perwakilan->Updatebukustokmini($kode_buku[$no], $datajumlah);
 			} $no++;
 		}
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil ditambah!!.</p>
+				                </div>');
 		redirect(base_url().'Perwakilan/Stok_mini');
 		
 
@@ -788,6 +794,11 @@ $('#pencet".$no."').click(function(){
 		if(count($data) > 0){
 			$this->m_pesan->save_batch('tbl_buku_reqretur',$data);
 			$this->session->set_userdata('no_suratretur',$no_suratretur[0]);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil ditambah!!.</p>
+				                </div>');
 			redirect(base_url().'Perwakilan/Cetak');
 		}else{
 			$this->session->set_flashdata('pesan', 
@@ -845,6 +856,11 @@ $('#pencet".$no."').click(function(){
 		if(count($data_kurang) > 0){
 			$this->m_perwakilan->Deletbukustokmini($no_stokmini[0], 'tbl_buku_psnstk', $data_kurang);
 		}
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil diubah!!.</p>
+				                </div>');
 		redirect(base_url().'Perwakilan/Pesanan_stokmini');
 	}
 	function UpdateRetur(){
@@ -852,6 +868,11 @@ $('#pencet".$no."').click(function(){
 		$where = array('no_suratretur' => $this->input->get('no_suratretur'), );
 		$up = $this->m_perwakilan->Update('tbl_suratretur', $data, $where);
 		if ($up) {
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil diubah!!.</p>
+				                </div>');
 			redirect(base_url()."Perwakilan/Det_terretur/?no_do=".$this->input->get('no_do'));
 		}
 	}
@@ -860,6 +881,11 @@ $('#pencet".$no."').click(function(){
 		$del_ = $this->m_perwakilan->Delete('tbl_buku_reqretur',$where);
 		$del = $this->m_perwakilan->Delete('tbl_suratretur',$where);
 		if ($del) {
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil Dihapus!!.</p>
+				                </div>');
 			redirect(base_url()."Perwakilan/Det_terretur/?no_do=".$this->input->get('no_do'));
 		}
 	}
@@ -892,6 +918,9 @@ $('#pencet".$no."').click(function(){
         $pdf->AddPage('P','A4');
         $pdf->Content();
         $pdf->Output($no_suratretur.'.pdf','D');
+	}
+	function Ubah_pass(){
+		$this->load->view('v_reset_pass');
 	}
 }
 ?>

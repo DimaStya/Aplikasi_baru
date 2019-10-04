@@ -6,7 +6,7 @@
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username'); ?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Administrasi</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> <?php echo$this->session->userdata('siapa'); ?></a>
         </div>
       </div>
       <ul class="sidebar-menu">
@@ -86,7 +86,43 @@
             <?php if($menu=='3'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Import';?>"><i class="fa fa-circle-o"></i> Import Buku</a></li>
             <?php if($menu=='4'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Paket';?>"><i class="fa fa-circle-o"></i> Daftar Paket</a></li>
           </ul>
-        </li>  
+        </li>
+         <?php
+        if($angka=='7'){
+          echo '<li class="treeview active">';
+        }else{
+          echo '<li class="treeview">';
+        }
+        ?>
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Report</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <?php if($menu=='1'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_sales';?>"><i class="fa fa-circle-o"></i>Report Sales</a></li>
+            <?php if($menu=='2'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_customer';?>"><i class="fa fa-circle-o"></i>Report Customer</a></li>
+            <?php if($menu=='3'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_rekanan';?>"><i class="fa fa-circle-o"></i>Report CV Rekanan</a></li>
+            <?php if($menu=='4'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_stok';?>"><i class="fa fa-circle-o"></i>Report Stok Buku</a></li>
+            <?php if($menu=='5'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_oc';?>"><i class="fa fa-circle-o"></i>Report OC</a></li>
+            <?php if($menu=='6'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_lpb';?>"><i class="fa fa-circle-o"></i>Report LPB</a></li>
+            <?php if($menu=='7'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_pesanan';?>"><i class="fa fa-circle-o"></i>Report Pesanan</a></li>
+            <?php if($menu=='8'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_alokasiproduk';?>"><i class="fa fa-circle-o"></i>Report Alokasi Produk</a></li>
+            <?php if($menu=='9'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_fakturnr';?>"><i class="fa fa-circle-o"></i>Report Faktur-NR</a></li>
+            <?php if($menu=='10'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_pengajuan';?>"><i class="fa fa-circle-o"></i>Report Pengajuan</a></li>
+            <?php if($menu=='11'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_mou';?>"><i class="fa fa-circle-o"></i>Report MoU</a></li>
+            <?php if($menu=='12'){echo '<li class="active">';}else{echo '<li>';}?><a href="<?php echo base_url().'Admin/Report_sjttr';?>"><i class="fa fa-circle-o"></i>Report SJ-TTR</a></li>
+          </ul>
+        </li> 
+        <?php
+        if($angka=='6'){
+          echo '<li class="active">';
+        }else{
+          echo '<li class="treeview">';
+        }
+        ?>
+          <a href="<?php echo base_url().'Admin/Tahun_depan';?>"><i class="fa fa-chain"></i> <span>Tahun Depan</span></a>
+        </li>
         <?php
         if($angka=='5'){
           echo '<li class="active">';
@@ -96,15 +132,6 @@
         ?>
           <a href="<?php echo base_url().'Admin/Aktivitas';?>"><i class="fa fa-user"></i> <span>Aktivitas Login</span></a>
         </li>
-        <?php
-        if($angka=='6'){
-          echo '<li class="active">';
-        }else{
-          echo '<li class="treeview">';
-        }
-        ?>
-          <a href="<?php echo base_url().'Admin/Tahun_depan';?>"><i class="fa fa-chain"></i> <span>Tahun Depan</span></a>
-        </li> 
       </ul>
     </section>
   </aside>

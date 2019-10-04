@@ -19,6 +19,19 @@
     setTimeout("preventBack()", 0);
     window.onunload=function(){null};
   </script>
+  <style type="text/css">
+  #notifications {
+    cursor: pointer;
+    position: fixed;
+    right: 0px;
+    z-index: 9999;
+    top: 110px;
+    margin-bottom: 22px;
+    margin-right: 15px;
+    min-width: 300px; 
+    max-width: 800px;  
+}
+</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -46,12 +59,12 @@
                 <img src="<?php echo base_url('dist/img/user.jpeg');?>" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $this->session->userdata('username'); ?>
+                  <?php echo $this->session->userdata('username'); ?><br><?php echo$this->session->userdata('siapa').' '. $this->session->userdata('alamat'); ?>
                 </p>
               </li>
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="ubah_pass.php" class="btn btn-default btn-flat">Ubah Password</a>
+                  <a href="<?php echo base_url().$this->session->userdata('link')."/Ubah_pass";?>" class="btn btn-default btn-flat">Ubah Password</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url()."Login/out";?>" class="btn btn-default btn-flat">Sign out</a>

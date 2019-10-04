@@ -6,7 +6,7 @@
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username'); ?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i>Admin Produksi</a>
+          <a href="#"><i class="fa fa-circle text-success"></i><?php echo$this->session->userdata('siapa'); ?></a>
         </div>
       </div>
       <ul class="sidebar-menu">

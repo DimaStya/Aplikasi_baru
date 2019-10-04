@@ -294,6 +294,127 @@ Class Pemasaran extends CI_Controller{
 		$this->load->view('Pemasaran/view_content_stokmini',$data1);
 		$this->load->view('Pemasaran/view_footer');
 	}
+	function Report_sales(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '1'
+		         );
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), );
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_sales', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_customer(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '2'
+		         );
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), );
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_customer', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_rekanan(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '3'
+		         );
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), );
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_rekanan', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_stok(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '4'
+		         );
+		$penerbit= $this->m_report->Penerbit();
+		$kode_penerbit = $penerbit->result();
+		$jenjang =$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'jenjang');
+		$tipe=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'tipe');
+		$edisi=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'edisi');
+		$kurikulum=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'kurikulum');
+		$data1 = array('penerbit' => $kode_penerbit,'jenjang' => $jenjang,'tipe' => $tipe,'edisi' => $edisi,'kurikulum' => $kurikulum);
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_stok', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_pesanan(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '5'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), 
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_pesanan', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_alokasiproduk(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '6'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$data1 = array('awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_alokasiproduk', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_pengajuan(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '7'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_pengajuan', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_mou(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '8'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_pemasaran/view_asside', $data);
+		$this->load->view('Report/view_content_mou', $data1);
+		$this->load->view('Report/view_footer');
+	}
 	function Ambil_data(){
 		$data = explode('&', $this->input->post('data'));
 		$kode_wilayah = $data[0];
@@ -484,6 +605,7 @@ Class Pemasaran extends CI_Controller{
                       <td scope="col"></td>
                       <td scope="col"></td>
                       <td scope="col"></td>
+                      <td scope="col"></td>
                   </tr>';
         $no=1;
         foreach ($data_pesanan->result() as $data) {
@@ -504,6 +626,8 @@ Class Pemasaran extends CI_Controller{
 <script>
 $('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
+      $('#sisa_kirim').hide();
+      $('#tombol').hide();
       $.ajax({
         type: 'POST',
         url: '".base_url('Pemasaran/Sisa_kirim')."',
@@ -517,6 +641,7 @@ $('#pencet".$no."').click(function(){
         success: function(response){
           $('#loadingklik').hide();
           $('#sisa_kirim').html(response.sisa_kirim).show();
+          $('#tombol').html(response.tombol).show();
           document.getElementById('no_do').innerHTML = '".$data->no_do."';
         },
       });
@@ -573,6 +698,8 @@ $('#pencet".$no."').click(function(){
 <script>
 $('#pencet".$no."').click(function(){ 
       $('#loadingklik').show();
+      $('#sisa_kirim').hide();
+      $('#tombol').hide();
       $.ajax({
         type: 'POST',
         url: '".base_url('Pemasaran/Sisa_kirim')."',
@@ -586,6 +713,7 @@ $('#pencet".$no."').click(function(){
         success: function(response){
           $('#loadingklik').hide();
           $('#sisa_kirim').html(response.sisa_kirim).show();
+          $('#tombol').html(response.tombol).show();
           document.getElementById('no_do').innerHTML = '".$data->no_do."';
         },
       });
@@ -749,9 +877,21 @@ $('#pencet".$no."').click(function(){
 		//echo $this->db->last_query($faktur);
 		// Buat variabel untuk menampung tag-tag option nya
 		// Set defaultnya dengan tag option Plih
-		$lists = '';
+		$lists = "<input type='hidden' name='no_do' id='no_do' value='".$no_do."'>";
         $no=1;
+        $button=0;
         foreach ($sisa_kirim->result() as $data) {
+        	if($data->sisa_kirim >0 ){
+        		$button++;
+        		$cek = "<input type='checkbox' name='hapus".$no."' id='hapus".$no."'>";
+        	}else{ $cek = "";}
+        	if($button > 0){
+        		$kon =  "return confirm('Yakin Mau menghapus sisa kirim?');";
+        		$tombol = '<tr>
+        		<td colspan="6"></td>
+        		<td colspan="2" align="center"><button type="submit" class="btn btn-primary" onclick="'.$kon.'">Batal Pesanan</button></td>
+        		</tr>';
+        	}else{$tombol = '';}      	
         	$lists .= "<tr>
         				<td align='center'>".$no."</td>
         				<td>".$data->kode_buku."</td>
@@ -759,11 +899,16 @@ $('#pencet".$no."').click(function(){
         				<td align='center'>".$data->jumlah_beli."</td>
         				<td align='center'>".$data->jumlah_kirim."</td>
         				<td align='center'>".$data->sisa_kirim."</td>
+        				<td align='center'>".$data->batal."</td>
+        				<td align='center'>".$cek."
+        					<input type='hidden' name='kode_buku[]' id='kode_buku[]' value='".$data->kode_buku."'>
+        					<input type='hidden' name='sisa_kirim[]' id='sisa_kirim[]' value='".$data->sisa_kirim."'>
+        				</td>
         			  </tr>";
             $no++;
         }
 		
-		$callback = array('sisa_kirim'=>$lists);
+		$callback = array('sisa_kirim'=>$lists, 'tombol'=>$tombol);
 
 		echo json_encode($callback); // konversi varibael $callback menjadi JSON
 
@@ -1120,6 +1265,7 @@ $('#terima').click(function(){
 				'jumlah_kirim' => 0,
 				'ket' => $ket[$no],
 				'sisa_kirim' => $datajumlah,
+				'batal' => 0,
 				'harga' => $harga[$no], ));
 		$no++;
 		}
@@ -1136,6 +1282,11 @@ $('#terima').click(function(){
 		$this->m_pemasaran->Insert('tbl_do',$datado);
 		$this->m_pemasaran->save_batch($data);
 		$this->session->set_userdata('no_pesanan',$no_pesanan);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil disimpan!!.</p>
+				                </div>');
 		redirect(base_url().'Pemasaran/Cetak');
 		
 	}
@@ -1151,6 +1302,11 @@ $('#terima').click(function(){
 
 		$this->m_pemasaran->Insert('tbl_do_stokmini',$datado);
 		$this->session->set_userdata('no_stokmini',$no_stokmini);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil disimpan!!.</p>
+				                </div>');
 		redirect(base_url().'Pemasaran/Cetak_stokmini');
 		
 	}
@@ -1158,6 +1314,11 @@ $('#terima').click(function(){
 		$no_pesanan = $this->input->post('no_pesanan');
 		$where =array('no_pesanan' => $no_pesanan);
 		$this->m_pemasaran->Delete('tbl_do',$where);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil disimpan!!.</p>
+				                </div>');
 		redirect(base_url().'Pemasaran/Req');
 		
 	}
@@ -1169,6 +1330,11 @@ $('#terima').click(function(){
 		$where =array('no_pesanan' => $no_pesanan);
 
 		$this->m_pemasaran->Update('tbl_pesanan',$pesan,$where);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Pesanan berhasil di tolak !!.</p>
+				                </div>');
 		redirect(base_url().'Pemasaran/Pesanan');
 		
 	}
@@ -1231,6 +1397,28 @@ $('#terima').click(function(){
         $pdf->AddPage('P','Letter');
         $pdf->Content();
         $pdf->Output($no_stokmini.'.pdf','D');
+	}
+	function Cek_hapus(){
+		$kode_buku = $this->input->post('kode_buku');
+		$sisa_kirim = $this->input->post('sisa_kirim');
+		$no_do = $this->input->post('no_do');
+		$no=0;
+		$n=1;
+		foreach ($sisa_kirim as $sisa_kirim) {
+			$hapus = $this->input->post('hapus'.$n);
+			if(isset($hapus)){
+				$hapus = $this->m_pemasaran->Batal_pesan($kode_buku[$no], $sisa_kirim, $no_do);
+			}
+		$no++;$n++;}
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Sisa Pesan Berhasil dihapus!!.</p>
+				                </div>');
+		redirect(base_url().'Pemasaran/Proses_kirim');
+	}
+	function Ubah_pass(){
+		$this->load->view('v_reset_pass');
 	}
 }
 ?>

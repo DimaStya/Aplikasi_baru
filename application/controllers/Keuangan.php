@@ -205,6 +205,23 @@ Class Keuangan extends CI_Controller{
 		$this->load->view('Keuangan/view_content_requpdate',$data1);
 		$this->load->view('Keuangan/view_footer');
 	}
+	function Report_fakturnr(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '1'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_keuangan/view_asside', $data);
+		$this->load->view('Report/view_content_fakturnr', $data1);
+		$this->load->view('Report/view_footer');
+	}
 	function Bayar(){
 		$no_kas = $this->input->post('no_kas');
 		date_default_timezone_set("Asia/Jakarta");
@@ -272,6 +289,11 @@ Class Keuangan extends CI_Controller{
 		}
 		$in_pembayaran = $this->m_keuangan->save_batch('tbl_pembayaran', $data);
 		if($in_pembayaran){
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di input!!.</p>
+				                </div>');
 			redirect('Keuangan/Bkm');
 		}
 	}
@@ -334,6 +356,11 @@ Class Keuangan extends CI_Controller{
 			$in_piutang = $this->m_keuangan->Insert('tbl_piutang', $data_piutang);
 			if($in_piutang){
 				$this->session->set_userdata('no_faktur',$this->input->post('no_faktur'));
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil diproses!!</p>
+				                </div>');
 				redirect('Keuangan/Cetak');
 			}
 		}
@@ -344,6 +371,11 @@ Class Keuangan extends CI_Controller{
 		$tanggal = $this->input->post('tanggal');
 		$total = $this->input->post('total');
 		$del_bayar = $this->m_keuangan->Delete_bayar($no_kas, $no_faktur, $tanggal, $total);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil dihapus!!.</p>
+				                </div>');
 		redirect('Keuangan/Bkm');
 
 	}
@@ -818,6 +850,11 @@ vertical-align:middle}
 		$in_faktur = $this->m_keuangan->Insert('tbl_notaretur', $data_nota);
 		if($in_faktur){
 			$this->session->set_userdata('no_notaretur',$no_notaretur);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil disimpan!!.</p>
+				                </div>');
 			redirect('Keuangan/Cetak_notaretur');
 		}
 	}
@@ -874,8 +911,18 @@ vertical-align:middle}
 		$del_nota = $this->m_keuangan->Delete('tbl_notaretur', $where);
 		if($del_nota){
 			if($dari =='hapus'){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil dihapus!!.</p>
+				                </div>');
 				redirect('Keuangan/Nota_retur');
 			}else if($dari == 'update'){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil diupdate!!.</p>
+				                </div>');
 				redirect('Keuangan/Req_update');
 			}
 		}
@@ -961,14 +1008,17 @@ vertical-align:middle}
     return $temp;
   }
   function terbilang($nilai) {
-    if($nilai<0) {
-      $hasil = "minus ". trim($this->penyebut($nilai));
-    } else if($nilai==0) {
-      $hasil = "Nol";
-    } else{
-      $hasil = trim($this->penyebut($nilai));
-    }        
-    return $hasil;
-}
+	    if($nilai<0) {
+	      $hasil = "minus ". trim($this->penyebut($nilai));
+	    } else if($nilai==0) {
+	      $hasil = "Nol";
+	    } else{
+	      $hasil = trim($this->penyebut($nilai));
+	    }        
+	    return $hasil;
+	}
+	function Ubah_pass(){
+		$this->load->view('v_reset_pass');
+	}
 }
 ?>

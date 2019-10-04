@@ -46,7 +46,6 @@ Class Admin extends CI_Controller{
 			}
 		}//batas cek ketersediaan cookie
 	}
-
 	function index(){
 		$data = array(
 			        'angka' => '1',
@@ -461,6 +460,11 @@ Class Admin extends CI_Controller{
 			// }
 			if(count($hapus)>0){
 				$this->m_buku->Deletbuku($kurang, $data_hapus);
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil dikurangi !.</p>
+				                </div>');
 			}
 			redirect(base_url('Admin/Detpaket/'.$kurang));
 		}
@@ -504,6 +508,196 @@ Class Admin extends CI_Controller{
 		$this->load->view('Admin/view_asside', $data);
 		$this->load->view('Admin/view_content_tahun',$data2);
 		$this->load->view('Admin/view_footer');
+	}
+	function Report_sales(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '1'
+		         );
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), );
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_sales', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_customer(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '2'
+		         );
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), );
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_customer', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_rekanan(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '3'
+		         );
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), );
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_rekanan', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_stok(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '4'
+		         );
+		$penerbit= $this->m_report->Penerbit();
+		$kode_penerbit = $penerbit->result();
+		$jenjang =$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'jenjang');
+		$tipe=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'tipe');
+		$edisi=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'edisi');
+		$kurikulum=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'kurikulum');
+		$data1 = array('penerbit' => $kode_penerbit,'jenjang' => $jenjang,'tipe' => $tipe,'edisi' => $edisi,'kurikulum' => $kurikulum);
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_stok', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_oc(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '5'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$data1 = array('awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_oc', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_lpb(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '6'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$data1 = array('awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_lpb', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_pesanan(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '7'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), 
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_pesanan', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_alokasiproduk(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '8'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$data1 = array('awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_alokasiproduk', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_fakturnr(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '9'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_fakturnr', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_pengajuan(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '10'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_pengajuan', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_mou(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '11'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_mou', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_sjttr(){
+		$data = array(
+			        'angka' => '7',
+			        'menu' => '12'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_sjttr', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Ubah_pass(){
+		$this->load->view('v_reset_pass');
 	}
 	
 }

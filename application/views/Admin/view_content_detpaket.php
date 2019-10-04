@@ -48,7 +48,7 @@
                   <input type="hidden" name="kode_paket" id="kode_paket" value="<?php echo $kode_paket;?>">
                 </tbody>
               </table>
-              <button  type='submit' class='pull-right btn-danger' name="kurang" id="kurang" value="<?php echo $kode_paket;?>"><i class='fa fa-fw fa-database'>-</i>Kurangi Buku</button>
+              <button  type='submit' class='pull-right btn-danger' name="kurang" id="kurang" value="<?php echo $kode_paket;?>" onclick="return confirm('Yakin Mau menghapus buku?');"> <i class='fa fa-fw fa-database'>-</i>Kurangi Buku</button>
             </form>
             </div>
         </div>
@@ -75,6 +75,11 @@
 <script src="<?php echo base_url('plugins/fastclick/fastclick.js');?>"></script>
 <script src="<?php echo base_url('dist/js/app.min.js');?>"></script>
 <script src="<?php echo base_url('dist/js/demo.js');?>"></script>
+
+
+<script>   
+    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+</script>
 <script>
   $(function () {
     $("#example1").DataTable();

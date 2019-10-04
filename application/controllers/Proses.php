@@ -183,9 +183,16 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Tidak Aktif'
 		         );
 	    $this->m_area->Resign('tbl_marea', $data, $kode_area);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dirubah Menjadi Resign!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Area');
 		
-	}function Add_perwakilan(){
+	}
+
+	function Add_perwakilan(){
 		$data_hidden = $this->input->post('kode_perwakilan');
 		$data_hidden1 = $this->input->post('kode_areanew');
 		if (empty($data_hidden)&&empty($data_hidden1)){ //insert
@@ -211,6 +218,19 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_perwakilan->Insert('tbl_perwakilan', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');   
+			}
 	   		redirect(base_url().'Admin/Perwakilan');
 
 		}else if (!empty($data_hidden) && empty($data_hidden1)) { //update saat kode perwakilan tidak kosong
@@ -228,6 +248,19 @@ Class Proses extends CI_Controller{
 		        'kode_perwakilan' => $data_hidden,
 		    );
 			$update = $this->m_perwakilan->Update('tbl_perwakilan', $data, $where);
+			if ($update){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Update!!.</p>
+				                </div>');   
+			}
 			redirect(base_url().'Admin/Perwakilan');
 		} else if(empty($data_hidden) && !empty($data_hidden1)){ //update saat pergantian kaper
 			$kode= $this->m_perwakilan->Getkodeperwakilan();
@@ -267,10 +300,16 @@ Class Proses extends CI_Controller{
 				$update = $this->m_perwakilan->Update('tbl_customer', $data2, $where);
 				$update = $this->m_perwakilan->Update('tbl_cvrekanan', $data2, $where);
 				$update = $this->m_perwakilan->Update('tbl_stokmini', $data2, $where);
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 				redirect(base_url().'Admin/Perwakilan');
 		}
 
 	}
+
 	function Add_sales(){
 		$data_hidden = $this->input->post('kode_sales');
 		if (empty($data_hidden)){ //insert
@@ -292,6 +331,19 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_sales->Insert('tbl_sales', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');   
+			}
 	   		redirect(base_url().'Admin/Sales');
 		}else { //update
 			$data = array(
@@ -304,6 +356,11 @@ Class Proses extends CI_Controller{
 		        'kode_sales' => $data_hidden,
 		    );
 			$insert = $this->m_sales->Update('tbl_sales', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Sales');
 
@@ -314,6 +371,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Tidak Aktif'
 		         );
 	    $this->m_sales->Resign('tbl_sales', $data, $kode_sales1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Sales');
 		
 	}
@@ -346,6 +408,19 @@ Class Proses extends CI_Controller{
 		         );
 		    $user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_admperwakilan->Insert('tbl_admper', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');
+			}  
 	   		redirect(base_url().'Admin/Adm_perwakilan');
 		}else { //update
 			$data = array(
@@ -365,6 +440,11 @@ Class Proses extends CI_Controller{
 		    );
 		    $user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_admperwakilan->Update('tbl_admper', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Adm_perwakilan');
 
@@ -375,6 +455,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Tidak Aktif'
 		         );
 	    $this->m_admperwakilan->Resign('tbl_admper', $data, $kode_admper1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Adm_perwakilan');
 		
 	}
@@ -406,6 +491,19 @@ Class Proses extends CI_Controller{
 		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_pemasaran->Insert('tbl_admpusat', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');
+			}  
 	   		redirect(base_url().'Admin/Pemasaran');
 		}else { //update
 			$data = array(
@@ -425,6 +523,11 @@ Class Proses extends CI_Controller{
 		    );
 		    $user = $this->m_user->Update('tbl_user', $data1, $where1);
 			$insert = $this->m_pemasaran->Update('tbl_admpusat', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Pemasaran');
 
@@ -438,6 +541,11 @@ Class Proses extends CI_Controller{
 		$this->m_user->Delete('tbl_user', $kode );
 	    $this->m_pemasaran->Resign('tbl_admpusat', $data, $kode_admpusat1);
 	    $this->m_pemasaran->Hapus_handle('tbl_handlepemasaran',$kode_admpusat1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Pemasaran');
 		
 	}
@@ -469,6 +577,20 @@ Class Proses extends CI_Controller{
 		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_keuangan->Insert('tbl_admkeuangan', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>'); 
+
+				}                
 	   		redirect(base_url().'Admin/Keuangan');
 		}else { //update
 			$data = array(
@@ -488,6 +610,11 @@ Class Proses extends CI_Controller{
 		    );
 		    $user = $this->m_user->Update('tbl_user', $data1, $where1);
 			$insert = $this->m_keuangan->Update('tbl_admkeuangan', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Keuangan');
 
@@ -501,6 +628,11 @@ Class Proses extends CI_Controller{
 		$this->m_user->Delete('tbl_user', $kode );
 	    $this->m_keuangan->Resign('tbl_admkeuangan', $data, $kode_admkeuangan1);
 	    $this->m_keuangan->Hapus_handle('tbl_handlekeuangan',$kode_admkeuangan1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/keuangan');
 		
 	}
@@ -532,6 +664,19 @@ Class Proses extends CI_Controller{
 		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_gudang->Insert('tbl_admgudang', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');   
+				}
 	   		redirect(base_url().'Admin/Gudang');
 		}else { //update
 			$data = array(
@@ -551,6 +696,11 @@ Class Proses extends CI_Controller{
 		    );
 		    $user = $this->m_user->Update('tbl_user', $data1, $where1);
 			$insert = $this->m_gudang->Update('tbl_admgudang', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Gudang');
 
@@ -564,6 +714,11 @@ Class Proses extends CI_Controller{
 		$this->m_user->Delete('tbl_user', $kode );
 	    $this->m_gudang->Resign('tbl_admgudang', $data, $kode_admgudang1);
 	    $this->m_gudang->Hapus_handle('tbl_handlegudang',$kode_admgudang1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Gudang');
 		
 	}
@@ -595,6 +750,19 @@ Class Proses extends CI_Controller{
 		         );
 			$user = $this->m_user->Insert('tbl_user', $data1);
 			$insert = $this->m_produksi->Insert('tbl_admproduksi', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');  
+				 } 
 	   		redirect(base_url().'Admin/Produksi');
 		}else { //update
 			$data = array(
@@ -614,6 +782,11 @@ Class Proses extends CI_Controller{
 		    );
 		    $user = $this->m_user->Update('tbl_user', $data1, $where1);
 			$insert = $this->m_produksi->Update('tbl_admproduksi', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Produksi');
 
@@ -626,6 +799,11 @@ Class Proses extends CI_Controller{
 		         );
 		$this->m_user->Delete('tbl_user', $kode );
 	    $this->m_produksi->Resign('tbl_admproduksi', $data, $kode_admproduksi1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Produksi');
 		
 	}
@@ -635,11 +813,11 @@ Class Proses extends CI_Controller{
 			$kode= $this->m_customer->Getkodecustomer();
 			$kode_ = $kode->row_array();
 			if($kode->num_rows()==0){ //data pertama
-				$kode_asli = 'CSTM_0001';
+				$kode_asli = 'CSTM_00001';
 			}else{ //data lebih dari satu
 				$angka =  explode('_', $kode_['max(kode_customer)']);
 				$number = $angka[1];
-				$number = sprintf('%04d',$number+1);
+				$number = sprintf('%05d',$number+1);
 				$kode_asli = 'CSTM_'.$number;
 			}
 			$data = array(
@@ -651,6 +829,19 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_customer->Insert('tbl_customer', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');   
+				}
 	   		redirect(base_url().'Admin/Customer');
 		}else { //update
 			$data = array(
@@ -663,6 +854,11 @@ Class Proses extends CI_Controller{
 		        'kode_customer' => $data_hidden,
 		    );
 			$insert = $this->m_customer->Update('tbl_customer', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Customer');
 
@@ -673,6 +869,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Tidak Aktif'
 		         );
 	    $this->m_customer->Resign('tbl_customer', $data, $kode_customer1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Customer');
 		
 	}
@@ -697,6 +898,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_rekanan->Insert('tbl_kerjasama', $data);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');
 	   		redirect(base_url().'Admin/Kerjasama');
 		}else { //update
 			$data = array(
@@ -709,6 +915,19 @@ Class Proses extends CI_Controller{
 		        'kode_kerjasama' => $data_hidden,
 		    );
 			$insert = $this->m_kerjasama->Update('tbl_kerjasama', $data, $where);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');
+			} 
 		}
 		redirect(base_url().'Admin/Kerjasama');
 
@@ -719,6 +938,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Tidak Aktif'
 		         );
 	    $this->m_kerjasama->Resign('tbl_kerjasama', $data, $kode_kerjasama1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Kerjasama');
 		
 	}
@@ -742,6 +966,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_pengajuan->Insert('tbl_pengajuan', $data);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');
         }
         //update
         else if(empty($kerjasamaold) && empty($pengajuanold) && !empty($pengajuanedit)){
@@ -754,6 +983,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_pengajuan->Update('tbl_pengajuan', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
         }
         //ganti
         else if(!empty($kerjasamaold) && !empty($pengajuanold) && empty($pengajuanedit)){
@@ -770,8 +1004,21 @@ Class Proses extends CI_Controller{
         	$data2 = array('aktif' => 'Tidak Aktif', );
 			$update = $this->m_pengajuan->Update('tbl_pengajuan', $data2, $where);
 			$insert = $this->m_pengajuan->Insert('tbl_pengajuan', $data);
+			if ($insert){
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');   
+			}else{
+				 $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-danger">
+				                    <h4>Gagal !!! </h4>
+				                    <p>Data Gagal di Input!!.</p>
+				                </div>');   
         }
 		redirect(base_url().'Admin/Pengajuan');
+	 	}
 	}
 	function Add_cv(){
 		$data_hidden = $this->input->post('kode_cv');
@@ -795,6 +1042,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_rekanan->Insert('tbl_cvrekanan', $data);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');
 	   		redirect(base_url().'Admin/Rekanan');
 		}else { //update
 			$data = array(
@@ -807,6 +1059,11 @@ Class Proses extends CI_Controller{
 		        'kode_cv' => $data_hidden,
 		    );
 			$insert = $this->m_rekanan->Update('tbl_cvrekanan', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Rekanan');
 
@@ -817,6 +1074,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Tidak Aktif'
 		         );
 	    $this->m_rekanan->Resign('tbl_cvrekanan', $data, $kode_cv1);
+	    $this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-warning">
+				                    <h4>Resign </h4>
+				                    <p>Data Telah Dihapus!!!</p>
+				                </div>'); 
 	    redirect(base_url().'Admin/Rekanan');
 		
 	}
@@ -840,6 +1102,11 @@ Class Proses extends CI_Controller{
 			        'aktif' => 'Aktif'
 		         );
 			$insert = $this->m_rekanan->Insert('tbl_mou', $data);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');
         }
         //update
         else if(empty($cvold) && empty($mouold) && !empty($mouedit)){
@@ -889,6 +1156,11 @@ Class Proses extends CI_Controller{
 			        'nama_penerbit' => strtoupper($this->input->post('nama_penerbit'))
 		         );
 			$data1 = $this->m_penerbit->Insert('tbl_penerbit', $data);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Input!!.</p>
+				                </div>');
 	   		redirect(base_url().'Admin/Penerbit');
 		}else { //update
 			$data = array(
@@ -898,6 +1170,11 @@ Class Proses extends CI_Controller{
 		        'kode_penerbit' => $data_hidden,
 		    );
 			$data1 = $this->m_penerbit->Update('tbl_penerbit', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Penerbit');
 
@@ -979,6 +1256,11 @@ Class Proses extends CI_Controller{
 		        'kode_buku' => $data_hidden,
 		    );
 			$data1 = $this->m_buku->Update('tbl_buku', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Buku');
 
@@ -1000,10 +1282,15 @@ Class Proses extends CI_Controller{
 							'nama_paket' => strtoupper($nama_paket));
 			
 			$insert = $this->m_buku->Insert('tbl_paket', $data);
-		}else{
+		}else{ //update
 			$data = array('nama_paket' => $nama_paket, );
 			$where = array('kode_paket' => $kode_paket,);
 			$update = $this->m_buku->Update('tbl_paket', $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		
 		redirect(base_url().'Admin/Paket');
@@ -1025,6 +1312,11 @@ Class Proses extends CI_Controller{
 		if(count($data_tambah)>0){
 			$this->m_buku->save_batch('tbl_detpaket', $data_tambah);
 		}
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di tambah!!!</p>
+				                </div>');
 		redirect(base_url('Admin/Detpaket/'.$kode_paket));
 		//print_r($data_tambah);
 		// for ($i=0; $i < count($this->input->post('tambah'))  ; $i++) { 
@@ -1036,6 +1328,11 @@ Class Proses extends CI_Controller{
 		$sekarang = $tahun-1;
 		$data1 = $this->m_tahun->Buat( $tahun);
 		$data1 = $this->m_tahun->Insert($tahun,$sekarang);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		redirect(base_url().'Admin/Tahun_depan');
 	}
 	function Harga(){
@@ -1049,12 +1346,22 @@ Class Proses extends CI_Controller{
 
 			$where = array('kode_buku' => $this->input->post('kode_bukudepan'));
 			$data1 = $this->m_buku->Update('tbl_harga_'.$tahun_depan, $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}else if(empty($tahun_depan) && !empty($tahun_sekarang)){
 			$data = array('harga_jawa' => $this->input->post('sekarang_jawa'),
 						  'harga_luar' => $this->input->post('sekarang_luar'));
 
 			$where = array('kode_buku' => $this->input->post('kode_bukusekarang'));
 			$data1 = $this->m_buku->Update('tbl_harga_'.$tahun_sekarang, $data, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Harga');
 	}
@@ -1351,6 +1658,5 @@ Class Proses extends CI_Controller{
 			redirect(base_url().'Perwakilan/TerFaktur');
 		}
 	}
-
 
 }

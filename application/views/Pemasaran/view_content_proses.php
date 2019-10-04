@@ -79,24 +79,29 @@
         <!-- body modal -->
         <div class="modal-body">
           <div class="box box-primary">
-                <div class="box-body">                  
+                <div class="box-body"> 
+                  <form method="POST" action="<?php echo base_url().'Pemasaran/Cek_hapus/';?>">              
                    <table width="100%" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th width="5%">No</th>
                           <th width="15%">Kode Buku</th>
-                          <th width="41%">Judul</th>
-                          <th width="13%">Jumlah Pesan</th>
-                          <th width="13%">Jumlah Kirim</th>
-                          <th width="13%">Kurang Kirim</th>
+                          <th width="35%">Judul</th>
+                          <th width="12%">Jumlah Pesan</th>
+                          <th width="12%">Jumlah Kirim</th>
+                          <th width="12%">Kurang Kirim</th>
+                          <th width="12%">Batal</th>
+                          <th width="12%">Batalkan</th>
                         </tr> 
                       </thead>
                       <tbody id="sisa_kirim">
                         
                       </tbody>
-                      <tfoot>
+                      <tfoot id="tombol">
+                        
                       </tfoot>     
                     </table>
+                  </form> 
                 </div>
               </div>
           </div>

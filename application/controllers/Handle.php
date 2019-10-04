@@ -26,6 +26,11 @@ class Handle extends CI_Controller {
 			        'kondisi' => 'Asli'
 		         );
 				$insert = $this->m_pemasaran->Tambah_handle('tbl_handlepemasaran', $data);
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil dimasukkan!!.</p>
+				                </div>');
 			}
 	   		redirect(base_url().'Admin/Wilayah_pemasaran');
 		}else { //update
@@ -46,6 +51,11 @@ class Handle extends CI_Controller {
 		         );
 			$insert = $this->m_pemasaran->Tambah_handle('tbl_handlepemasaran', $data);
 			$update = $this->m_pemasaran->Ubah_handle('tbl_handlepemasaran', $data1, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Wilayah_pemasaran');
 	}
@@ -60,6 +70,11 @@ class Handle extends CI_Controller {
 	         );
 		$del = $this->m_pemasaran->Hapus_handle('tbl_handlepemasaran', $kode );
 		$update = $this->m_pemasaran->Ubah_handle('tbl_handlepemasaran', $data1, $where);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil dihapus !!.</p>
+				                </div>');
 		redirect(base_url().'Admin/Wilayah_pemasaran');
 	}
 
@@ -77,6 +92,11 @@ class Handle extends CI_Controller {
 			        'kondisi' => 'Asli'
 		         );
 				$insert = $this->m_keuangan->Tambah_handle('tbl_handlekeuangan', $data);
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di input!!.</p>
+				                </div>');
 			}
 	   		redirect(base_url().'Admin/Wilayah_keuangan');
 		}else { //update
@@ -97,6 +117,11 @@ class Handle extends CI_Controller {
 		         );
 			$insert = $this->m_keuangan->Tambah_handle('tbl_handlekeuangan', $data);
 			$update = $this->m_keuangan->Ubah_handle('tbl_handlekeuangan', $data1, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Wilayah_keuangan');
 	}
@@ -111,6 +136,11 @@ class Handle extends CI_Controller {
 	         );
 		$del = $this->m_pemasaran->Hapus_handle('tbl_handlekeuangan', $kode );
 		$update = $this->m_pemasaran->Ubah_handle('tbl_handlekeuangan', $data1, $where);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di hapus!!.</p>
+				                </div>');
 		redirect(base_url().'Admin/Wilayah_keuangan');
 	}
 
@@ -128,6 +158,11 @@ class Handle extends CI_Controller {
 			        'kondisi' => 'Asli'
 		         );
 				$insert = $this->m_gudang->Tambah_handle('tbl_handlegudang', $data);
+				$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-info">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di masukkan!!.</p>
+				                </div>');
 			}
 	   		redirect(base_url().'Admin/Wilayah_gudang');
 		}else { //update
@@ -148,6 +183,11 @@ class Handle extends CI_Controller {
 		         );
 			$insert = $this->m_gudang->Tambah_handle('tbl_handlegudang', $data);
 			$update = $this->m_gudang->Ubah_handle('tbl_handlegudang', $data1, $where);
+			$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil di Update!!.</p>
+				                </div>');
 		}
 		redirect(base_url().'Admin/Wilayah_gudang');
 	}
@@ -162,6 +202,12 @@ class Handle extends CI_Controller {
 	         );
 		$del = $this->m_pemasaran->Hapus_handle('tbl_handlegudang', $kode );
 		$update = $this->m_pemasaran->Ubah_handle('tbl_handlegudang', $data1, $where);
+		$this->session->set_flashdata('pesan', 
+				                '<div class="alert alert-success">
+				                    <h4>Berhasil </h4>
+				                    <p>Data Berhasil dihapus!!.</p>
+				                </div>');
 		redirect(base_url().'Admin/Wilayah_gudang');
+		
 	}
 }

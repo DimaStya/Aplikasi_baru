@@ -320,6 +320,90 @@ Class Gudang extends CI_Controller{
 		$this->load->view('Gudang/view_content_stokmini',$data1);
 		$this->load->view('Gudang/view_footer');
 	}
+	function Report_stok(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '1'
+		         );
+		$penerbit= $this->m_report->Penerbit();
+		$kode_penerbit = $penerbit->result();
+		$jenjang =$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'jenjang');
+		$tipe=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'tipe');
+		$edisi=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'edisi');
+		$kurikulum=$this->m_report->Buku($kode_penerbit[0]->kode_penerbit,'kurikulum');
+		$data1 = array('penerbit' => $kode_penerbit,'jenjang' => $jenjang,'tipe' => $tipe,'edisi' => $edisi,'kurikulum' => $kurikulum);
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_gudang/view_asside', $data);
+		$this->load->view('Report/view_content_stok', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_oc(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '2'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$data1 = array('awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_gudang/view_asside', $data);
+		$this->load->view('Report/view_content_oc', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_lpb(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '3'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$data1 = array('awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_gudang/view_asside', $data);
+		$this->load->view('Report/view_content_lpb', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_pesanan(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '4'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(), 
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Admin/view_asside', $data);
+		$this->load->view('Report/view_content_pesanan', $data1);
+		$this->load->view('Report/view_footer');
+	}
+	function Report_sjttr(){
+		$data = array(
+			        'angka' => '5',
+			        'menu' => '5'
+		         );
+		date_default_timezone_set("Asia/Jakarta");
+		$akhir= new DateTime('last day of this month');
+		$awal = new DateTime('first day of this month');
+		$kawasan= $this->m_report->Kawasan();
+		$data1 = array('kawasan' => $kawasan->result(),
+						'awal' => $awal->format('Y-m-d'),
+ 						'akhir' => $akhir->format('Y-m-d'));
+		$this->load->view('Report/view_head');
+		$this->load->view('Co_gudang/view_asside', $data);
+		$this->load->view('Report/view_content_sjttr', $data1);
+		$this->load->view('Report/view_footer');
+	}
 	function Lpb_baru(){
 		date_default_timezone_set("Asia/Jakarta");
 		$tahun_sek= date('Y');
@@ -1073,6 +1157,7 @@ $('#pencet".$no."').click(function(){
 			$data = array('proses' => 'Proses SJ', );
 			$up = $this->m_gudang->Update('tbl_pesanan', $data, $where);
 			if($klik=='sj'){
+
 				$alamat = $this->m_gudang->Alamat($no_pesanan);
 				if ($alamat['stok'] == 'stok_real') {
 					$buku = $this->m_gudang->Data_buku_sj($no_pesanan);
@@ -1117,11 +1202,22 @@ $('#pencet".$no."').click(function(){
 				$this->load->view('Gudang/view_content_simpansj', $data_sj);
 				$this->load->view('Gudang/view_footer');
 			}else if($klik=='approve'){
+				$this->session->set_flashdata('pesan', 
+			                '<div class="alert alert-success">
+			                    <h4>Berhasil </h4>
+			                    <p>Pesanan berhasil di Approve</p>
+			                </div>'); 
 				redirect('Gudang/Pesanan');
 			}
 			
-		}else if($cek['proses']=='DO, Menunggu SJ'){
+		}else{
 			//data pesanan dalam proses request hapus
+			$this->session->set_flashdata('pesan', 
+			                '<div class="alert alert-danger">
+			                    <h4>GAGAL !!! </h4>
+			                    <p>Pesanan dalam status request hapus</p>
+			                </div>'); 
+			redirect('Gudang/Pesanan');
 		}
 	}
 	function ProsesSJ(){
@@ -1231,6 +1327,11 @@ $('#pencet".$no."').click(function(){
 		$hap_buku = $this->m_gudang->Delete('tbl_buku_stkmini', $where);
 		if ($hap_buku) {
 			$hap_sj = $this->m_gudang->Delete('tbl_sj_stok', $where);
+			$this->session->set_flashdata('pesan', 
+			                '<div class="alert alert-success">
+			                    <h4>Berhasil </h4>
+			                    <p>SJ Stok MINI telah dihapus</p>
+			                </div>'); 
 			redirect(base_url().'Gudang/Proses_stokmini');
 		}
 	}
@@ -1447,6 +1548,11 @@ $('#pencet".$no."').click(function(){
 		$this->session->set_userdata('kode_retur',$kode_retur);
 		$this->m_gudang->Insert('tbl_retur',$data_retur);
 		$this->m_gudang->save_batch('tbl_buku_retur',$data);
+		$this->session->set_flashdata('pesan', 
+			                '<div class="alert alert-success">
+			                    <h4>Berhasil </h4>
+			                    <p>Retur Berhasil di Buat...</p>
+			                </div>'); 
 		redirect(base_url().'Gudang/Cetak_ttr');
 		
 
@@ -1460,8 +1566,17 @@ $('#pencet".$no."').click(function(){
 			$upd = $this->m_gudang->Updateretur($kode_retur);
 			$del_ttr = $this->m_gudang->Delete('tbl_retur', $where);
 			if($dari =='update'){
+				$this->session->set_flashdata('pesan', 
+			                '<div class="alert alert-success">
+			                    <h4>Berhasil </h4>
+			                </div>'); 
 				redirect('Gudang/Update');
 			}else if($dari == 'hapus'){
+				$this->session->set_flashdata('pesan', 
+			                '<div class="alert alert-success">
+			                    <h4>Berhasil </h4>
+			                    <p>Nota Retur Berhasil dihapus...</p>
+			                </div>'); 
 				redirect('Gudang/Retur');
 			}
 		}
@@ -1495,7 +1610,7 @@ $('#pencet".$no."').click(function(){
 	}
 	function Cetak_ttr(){
 		$data = array(
-			        'angka' => '2',
+			        'angka' => '3',
 			        'menu' => '0'
 		         );
 		$this->load->view('Gudang/view_head');
@@ -1544,6 +1659,9 @@ $('#pencet".$no."').click(function(){
         $pdf->AddPage('P','A4');
         $pdf->Content();
         $pdf->Output($no_sj_stkmini.'.pdf','D');
+	}
+	function Ubah_pass(){
+		$this->load->view('v_reset_pass');
 	}				
 }
 ?>

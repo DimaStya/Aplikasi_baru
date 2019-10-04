@@ -41,7 +41,7 @@
                   <div class="col-xs-6">
                       <label>Nama Paket</label>
                       <input type="hidden" name="kode_paket" id="kode_paket">
-                      <input type="text" class="form-control col-xs-6" name="nama_paket" id="nama_paket"  placeholder="Nama Lengkap" required="">
+                      <input type="text" class="form-control col-xs-6" name="nama_paket" id="nama_paket"  placeholder="Nama Paket" required="">
                   </div>
                 </div>
               </div>

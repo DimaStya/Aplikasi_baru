@@ -17,6 +17,19 @@
 
   <link rel="stylesheet" href="<?php echo base_url('plugins/iCheck/all.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('plugins/select2/select2.min.css');?>">
+    <style type="text/css">
+      #notifications {
+        cursor: pointer;
+        position: fixed;
+        right: 0px;
+        z-index: 9999;
+        top: 110px;
+        margin-bottom: 22px;
+        margin-right: 15px;
+        min-width: 300px; 
+        max-width: 800px;
+      }
+    </style>
   <script type = "text/javascript" >
     function preventBack(){
       window.history.forward();
@@ -51,13 +64,12 @@
                 <img src="<?php echo base_url('dist/img/user.jpeg');?>" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $this->session->userdata('username'); ?><br>
-                  Admin Gudang
+                  <?php echo $this->session->userdata('username'); ?><br><?php echo$this->session->userdata('siapa').' '. $this->session->userdata('alamat'); ?>
                 </p>
               </li>
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="ubah_pass.php" class="btn btn-default btn-flat">Ubah Password</a>
+                  <a href="<?php echo base_url().$this->session->userdata('link')."/Ubah_pass";?>" class="btn btn-default btn-flat">Ubah Password</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url()."Login/out";?>" class="btn btn-default btn-flat">Sign out</a>

@@ -73,7 +73,7 @@
                 <div class="form-group"> 
                   <div class="col-xs-6">
                     <label>Tanggal</label>
-                      <input type="date" class="form-control col-xs-6" name="tanggal" id="tanggal" required=""">
+                      <input type="date" class="form-control col-xs-6" name="tanggal" id="tanggal" required="">
                   </div>
                 </div>
               </div>

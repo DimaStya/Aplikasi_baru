@@ -53,5 +53,9 @@ class M_login extends CI_Model{
 		$data = $this->db->query("SELECT kode_admproduksi, nama_produksi FROM tbl_admproduksi WHERE kode_admproduksi='$kodeadm'");
 		return $data;
 	}
+    public function Update($table, $data, $where){
+        $res = $this->db->Update($table, $data, $where);
+        return $res;
+    }
 }
 ?>

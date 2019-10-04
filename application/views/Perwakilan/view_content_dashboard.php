@@ -15,7 +15,6 @@
         </div>
         <div class="box-body">
           <div class="row">
-            <?php print_r($this->session->userdata); ?>
           </div>
         </div>
       </div>

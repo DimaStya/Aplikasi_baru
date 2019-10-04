@@ -131,7 +131,7 @@ class M_pemasaran extends CI_Model{
         return $data;
     }
     public function sisa_kirim($no_do){
-        $data = $this->db->query("SELECT tbl_buku_do.kode_buku, tbl_buku.judul, tbl_buku_do.jumlah_beli, tbl_buku_do.jumlah_kirim, tbl_buku_do.sisa_kirim FROM tbl_buku_do, tbl_buku WHERE tbl_buku_do.no_do = '$no_do' AND tbl_buku_do.kode_buku = tbl_buku.kode_buku "); 
+        $data = $this->db->query("SELECT tbl_buku_do.kode_buku, tbl_buku.judul, tbl_buku_do.jumlah_beli, tbl_buku_do.jumlah_kirim, tbl_buku_do.sisa_kirim, tbl_buku_do.batal FROM tbl_buku_do, tbl_buku WHERE tbl_buku_do.no_do = '$no_do' AND tbl_buku_do.kode_buku = tbl_buku.kode_buku "); 
         return $data;
     }
     public function Data_reqretur($no_suratretur){
@@ -206,6 +206,14 @@ class M_pemasaran extends CI_Model{
             WHERE tbl_stokmini.kode_buku = tbl_buku.kode_buku
             AND tbl_stokmini.kode_perwakilan = tbl_perwakilan.kode_perwakilan
             AND tbl_perwakilan.kode_wilayah='$kode_wilayah'");
+        return $data;
+    }
+    public function Batal_pesan($kode_buku, $sisa_kirim, $no_do){
+        $data = $this->db->query("UPDATE tbl_buku, tbl_buku_do 
+            SET tbl_buku.stok_pesan = tbl_buku.stok_pesan-$sisa_kirim, 
+            tbl_buku_do.sisa_kirim = tbl_buku_do.sisa_kirim-$sisa_kirim, 
+            tbl_buku_do.batal = tbl_buku_do.batal+$sisa_kirim
+            WHERE tbl_buku_do.no_do ='$no_do' AND tbl_buku_do.kode_buku = tbl_buku.kode_buku AND tbl_buku_do.kode_buku = '$kode_buku'");
         return $data;
     }
 }

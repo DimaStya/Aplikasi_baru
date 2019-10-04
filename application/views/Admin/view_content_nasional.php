@@ -1,16 +1,3 @@
-<style type="text/css">
-  #notifications {
-    cursor: pointer;
-    position: fixed;
-    right: 0px;
-    z-index: 9999;
-    top: 110px;
-    margin-bottom: 22px;
-    margin-right: 15px;
-    min-width: 300px; 
-    max-width: 800px;  
-}
-</style>
 <script src = "<?php echo base_url('js/nasional.js'); ?>"></script>
 <div class="content-wrapper">
   <section class="content-header">
@@ -78,8 +65,7 @@
     <section class="content">
       <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Data Manager Nasional</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','')">+</button>
-              <div id="notifications"><?php echo $this->session->flashdata('pesan'); ?></div> 
+              <h3 class="box-title">Data Manager Nasional</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','')">+</button> 
             </div>
             <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
@@ -112,10 +98,6 @@
         </div>
     </section>
 </div>
-<script src="<?php echo base_url("js/jquery-1.7.1.min.js"); ?>" type="text/javascript"></script>
-<script>   
-    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
-</script>
 <script type="text/javascript">
   <?php $no=1; foreach ($data as $nasional) { 
     echo "

@@ -105,7 +105,7 @@
     <section class="content">
       <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Data cv</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','','','','','')">+</button>
+              <h3 class="box-title">Data cv</h3>&nbsp;<button type="button" class="btn-info" data-toggle="modal" data-target="#myModal" onclick= "SetInput('','','','','','','','','')">+</button>
       
             </div>
             <div class="box-body">

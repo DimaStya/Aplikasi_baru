@@ -125,10 +125,10 @@ class Pdf extends FPDF{
 			$this->Ln();
 			$this->Cell(9,6,$no,'B',0,'C',false);//no
 	        $this->Cell(26,6,$tabel['kode_buku'],'B',0,'L',false);//kode buku
-	        $this->Cell(82,6,$tabel['judul'],'B',0,'L',false);//judul
+	        $this->Cell(82,6,substr($tabel['judul'],0,40),'B',0,'L',false);//judul
 			$this->Cell(20,6,$tabel['jumlah_beli'],'B',0,'R',false);//jumlah beli
 	        $this->Cell(14,6,$tabel['nama_penerbit'],'B',0,'C',false);//penerbit
-	        $this->Cell(18,6,$tabel['jenjang'],'B',0,'C',false);//jenjang
+	        $this->Cell(18,6,substr($tabel['jenjang'],0,10),'B',0,'C',false);//jenjang
 	        $this->Cell(11,6,$tabel['edisi'],'B',0,'C',false);//edisi
 	        $this->Cell(20,6,$tabel['stok_pesan'],'B',0,'R',false);//stok pesan
 	        $no++;			

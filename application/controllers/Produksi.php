@@ -263,5 +263,8 @@ $('#pencet".$no."').click(function(){
 			redirect(base_url().'Produksi/Daftar_oc');
 		}
 	}
+	function Ubah_pass(){
+		$this->load->view('v_reset_pass');
+	}
 }
 ?>

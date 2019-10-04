@@ -80,7 +80,7 @@
         <div class="modal-body">
           <div class="box box-primary">
                 <div class="box-body">                  
-                   <table width="100%"  rules="rows">
+                   <table width="100%"  class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th width="5%">No</th>
@@ -89,6 +89,7 @@
                           <th width="10%">Jumlah Pesan</th>
                           <th width="10%">Jumlah Kirim</th>
                           <th width="10%">Kurang Kirim</th>
+                          <th width="10%">Batal</th>
                         </tr> 
                       </thead>
                       <tbody id="sisa_kirim">
